@@ -144,42 +144,27 @@
         if (myNumber) {
             var userNumber = parseInt (prompt("Enter number from 1 to 10:"));
         }
-        while (myNumber != userNumber) {
-            if (!myNumber || userNumber === null) {
+        
+        while (myNumber != userNumber || (userNumber <=1 || userNumber > 10)) {
+            if (!myNumber || !userNumber) {  //// можно так или так. одно и тоже
                 break;
             }
-
-            if (userNumber < myNumber) {
+            if (userNumber < 1 || userNumber > 10) {
+                alert("From 1 to 10 !!!");
+            }
+            else if (userNumber < myNumber) {
                 alert("Too Small");
             }
             else if (userNumber > myNumber) {
                 alert("Too Big");
             }
+            
             userNumber = prompt("Enter number from 1 to 10:");
         }
 
-        if (myNumber && userNumber !== null) {
+        if (myNumber && userNumber) {
             alert(`Congratulations!!! Number ${userNumber} is correct`);
         }
-
-            
-        // }
-
-        // let number1 = prompt ("Enter number");
-
-        // while (number1 === "" || isNaN (+number1)) {
-        //     number1 = prompt ("Enter number");
-        // }
-        // console.log (number1 * 2);
-
-
-
-
-
-
-
-
-
 
         //// _________________________END_________________________
 
