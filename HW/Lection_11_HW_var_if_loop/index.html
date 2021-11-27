@@ -1,67 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lection_11_HW_var_if_loop</title>
 </head>
+
 <body>
     <script>
-        // _________________________01________________________
+        //// _________________________01_________________________
+        //// Создать цикл на 10 итераций. На каждой итерации если i четное, то вывести в консоль слово Fiz, 
+        //// если i не четное, то вывести в консоль слово Buz, если i кротное цифре 3, то вывести FizBuz.
 
-        // for (i = 1; i <= 10; i++) {
-        //     if (i % 3 === 0) {
-        //         console.log ("FizBuz");
-        //     }
-        //     else if (i % 2 === 0) {
-        //         console.log ("Fiz");
-        //     }
-        //     else {
-        //         console.log ("Buz")
-        //     }
-        // }
-
-        // _________________________02_________________________
-
-    // debugger
-            //// 1st
-            // let number = prompt("Enter number:", 10);
-            // let result = number;
-            // if (result == 0) {
-            //     result = 1;
-            // }
-            // else {
-            //     for (i = result - 1; i >= 1; i--) {
-            //         result *= i;
-            //     }
-            // }
-
-            // alert(`${number}! =  ${result}`);
-            // console.log(`${number}! = ${result}`);
-
-            //// 2nd
-            // var number = prompt("Enter number:", 10);
-            // var result = 1;
-            // for (i = number; i > 1; i--) {
-            //     result *= i;
-            // }
-            // alert(`${number}! =  ${result}`);
-            // console.log(`${number}! = ${result}`);
-
-            // 3rd
-            let number = prompt("Enter number:", 10);
-            if (number == 0) {
-            result = 1;
+        console.log ("********* 1st**********");
+        for (i = 1; i <= 10; i++) {
+            if (i % 3 === 0) {
+                console.log("FizBuz");
+            }
+            else if (i % 2 === 0) {
+                console.log("Fiz");
             }
             else {
+                console.log("Buz")
+            }
+        }
+
+        //// _________________________02_________________________
+        //// Написать логику нахождения факториала числа 10.
+
+        // debugger
+        //// 1st
+        // let number = prompt("Enter number:", 10);
+        // let result = number;
+        // if (result == 0) {
+        //     result = 1;
+        // }
+        // else {
+        //     for (i = result - 1; i >= 1; i--) {
+        //         result *= i;
+        //     }
+        // }
+        // alert(`${number}! =  ${result}`);
+        // console.log(`${number}! = ${result}`);
+
+        //// 2nd
+        // var number = prompt("Enter number:", 10);
+        // var result = 1;
+        // for (i = number; i > 1; i--) {
+        //     result *= i;
+        // }
+        // alert(`${number}! =  ${result}`);
+        // console.log(`${number}! = ${result}`);
+
+        //// 3rd
+        console.log ("********* 2nd**********");
+        // let number = prompt("Enter number:", 10);
+        let number = 10
+        if (number == 0) {
+            result = 1;
+        }
+        else {
             result = 1;
             for (i = 1; i <= number; i++) {
-                result *= i;}
-            } 
-            alert(`${number}! =  ${result}`);
-            console.log(`${number}! = ${result}`);
+                result *= i;
+            }
+        }
+        // alert(`${number}! =  ${result}`);
+        console.log(`${number}! = ${result}`);
+
+        //// _________________________03_________________________
+        //// В пачке бумаги 500 листов. За неделю в офисе расходуется 1200 листов. 
+        //// Какое наименьшее количество пачек бумаги нужно купить в офис на 8 недель?
+
+        console.log ("********* 3rd**********");
+        const sheetsInReamPaper = 500;
+        const consumptionPerWeek = 1200;
+        const weeksAmount = 8;
+
+        let totalReamPaper = consumptionPerWeek * weeksAmount / sheetsInReamPaper; //19.2
+        if (totalReamPaper % 1 != 0) {
+           let remainder = totalReamPaper % 1; //0.2
+           totalReamPaper = totalReamPaper - remainder + 1; //20
+        }
+        console.log (`Minimum number of reams for ${weeksAmount} weeks: ${totalReamPaper}`);
+        // const quotient =  (a - a % b) / b;
+        // const remainder = a % b;
+
+        //// _________________________04_________________________
+        // Создать функцию, которая выведет в консоль номер этажа и номер подъезда по номеру квартиры. 
+        // Этажей у нас 9, квартир на этаже по 3  => 27 кв/подъезде ; 17 подъездов 
+        // const porch; //?
+        // const floor; //?
+
+        // console.log ("********* 4th**********");
+        // const roomsOnFloor = 3;
+        // const floors = 9;
+        // const roomNumber = 459;
+        
+        // let flatNumber = prompt(`Enter room number (1 - ${roomNumber}):`);
+        // let totalRoomsInPorch = roomsOnFloor * floors;
+        //     // for (let flatNumber = 1; flatNumber <= roomNumber; flatNumber++) {
+        //         const porch = ((flatNumber - 1) / totalRoomsInPorch + 1) - ((flatNumber - 1) / totalRoomsInPorch + 1) % 1;
+        //         const floor = (((flatNumber - 1) % totalRoomsInPorch) / roomsOnFloor + 1) - (((flatNumber - 1) % totalRoomsInPorch) / roomsOnFloor + 1) % 1;
+        //         console.log(`Flat: ${flatNumber} - Porch: ${porch}; Floor: ${floor}`);
+            // }
+
+        //// _________________________05_________________________
+        //// Вывести в консоль пирамиду. Переменная указывает количество строк из которых построится пирамида. 
+        //// Пирамида должна строится в одинаковом визуально виде между собой, но строго учитывая кол-во строк
+        // const medianNumber = 6
+            // -----#-----  //1
+            // ----###----  //2
+            // ---#####---  //3
+            // --#######--  //4
+            // -#########-  //5
+            // ###########  //6 
+
+            console.log ("********* 5th**********");
+            console.log ("IN PROGRESS");
+
+        //// _________________________06_________________________
+        //// Напишите программу которая спрашивает имя пользователя (prompt).
+        //// Если имя больше 8 букв скажите что имя не должно быть больше 8 символов(alert) и попросите снова ввести имя. 
+        //// Нужно повторять это действие до тех пор пока пользователь не введет правильное имя. Затем вывести имя и колличество букв.
+        // console.log ("********* 6th**********");
+        // let userName = prompt ("Enter your name:");
+
+        // while (userName.length > 8) {
+        //     alert ("Name should be <= 8 letters")
+        //     userName = prompt ("Enter your name:"); 
+        //     }
+        // console.log (`Name: ${userName}, ${userName.length} letter(s)`);
+        
+
+        //// _________________________07_________________________
+        // Напишите игру угадай число. Например попросите пользователя отгадать число в диапазоне от 1 до 10.
+        // Если число меньше загаданного выведите сообщение "слишком мало", если число больше выведите "слишком много"
+        // Когда пользователь отгадает выведите поздравления.
+
+        let myNumber = parseInt (prompt("My number:"));
+        if (myNumber) {
+            var userNumber = parseInt (prompt("Enter number from 1 to 10:"));
+        }
+        while (myNumber != userNumber) {
+            if (!myNumber || userNumber === null) {
+                break;
+            }
+
+            if (userNumber < myNumber) {
+                alert("Too Small");
+            }
+            else if (userNumber > myNumber) {
+                alert("Too Big");
+            }
+            userNumber = prompt("Enter number from 1 to 10:");
+        }
+
+        if (myNumber && userNumber !== null) {
+            alert(`Congratulations!!! Number ${userNumber} is correct`);
+        }
+
+            
+        // }
+
+        // let number1 = prompt ("Enter number");
+
+        // while (number1 === "" || isNaN (+number1)) {
+        //     number1 = prompt ("Enter number");
+        // }
+        // console.log (number1 * 2);
+
+
+
+
+
+
+
+
+
+
+        //// _________________________END_________________________
+
+
+
+
+
+
+
+
+
+
+
+    //     // let flatNumber = prompt(459); // переменная 32
+
+    //     let totalRoomsInPorch = roomsOnFloor * floors;
+    // for (let flatNumber=1; flatNumber <= roomNumber; flatNumber++) {
+
+    //     let porch = flatNumber / totalRoomsInPorch; // 1.18
+    //     let remainderPorch = porch % 1; // 0.18
+        
+    //     if (remainderPorch == 0) {
+    //         remainderPorch++;
+    //     }
+    //     let floor = remainderPorch * 9; //1.62
+
+    //     if (floor % 1 != 0) { //если квартира-дробное число (есть остаток деления)
+    //             floor = (floor - floor % 1) / 1 + 1;
+    //         }
+
+    //     // let quotientFloor = flatNumber / 3 - 9 * (porch-1);
+    //     if (remainderPorch != 0) { //если подъезд-дробное число (есть остаток деления)
+    //         porch = porch - remainderPorch + 1;
+    //     }
+    //         console.log (`Flat: ${flatNumber} - Porch: ${porch}; Floor: ${floor}`);
+    //     }
+
+    //         // let porchCounter = 0;
+    //         // let floorCounter = 0;
+    //         // for (let i = 0; i <= roomNumber; i+=3) {  
+                
+    //         //         if (i == flatNumber) {
+    //         //         console.log(i);
+    //         //         }
+    //         //         floorCounter++;
+    //         //         console.log(floorCounter);
+    //         // }
+
+    //         // // for (let a = 0; a <= roomNumber/17; a++) {
+    //         // //     for (let i = 0; i <= roomNumber; i += 27) {
+    //         // //         for (let j = 0; j <= roomNumber; j++) {
+    //         // //             if (j == flatNumber) {
+    //         // //                 console.log(i, j, a);
+    //         // //             }
+    //         // //         }
+    //         // //     }
+    //         // // }
+
+    //        // roomNumber--;
     </script>
-    
+
 </body>
+
 </html>

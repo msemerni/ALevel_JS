@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_12_CW</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h4>Lesson_12_CW</h4>
+        <script>
+
+          let a1 = isFinite(Infinity); // false
+          console.log (a1);
+        ////
+          let number;
+        //if (number)
+        //if (Boolean (number)
+          if (!!number) {
+          console.log (number);
+          }
+        ////
+        let num1 = 3;
+        num1.toString();
+        String (num1); //преобразование в стринг
+        Number (num1); //преобразование в намбер
+        ////
+        parseInt ("25ff"); // отбрасывается только правая часть. если буквы слева - не получится
+        parseFloat ("25.48");
+        ////
+        35n;
+        BigInt (35);
+        ////
+        /////////////////////////////////
+
+        function funk1 () {
+            console.log("hello");
+            console.log(arguments); //для массивов
+            console.log(arguments [0]); //для массивов
+
+        }
+        funk1 ();
+        let a2 = funk1;
+        a2 ();
+
+        ////
+        function funk2 (a = 5) { // 5 - значение по умолчанию
+            return a * a;
+        }
+        
+        ////
+        let f2 = function // не будет работать hoising
+
+        (function (params) {
+            
+        }) // самовызывающая
+
+        ///
+        let func3 = () => 4;
+        //
+        let func3 = () => {
+            return 4;
+        }
+        ////
+        function funk5 () {
+            console.log(arguments [0]); //2
+            for (let i = 0; i < arguments.length; i++) {
+                console.log(i); // 2 3 4 
+            }
+        }
+        funk5 (2, 3, 4)
+        ////////////////////////////////////////////////////////
+        const obj = {
+            name: "Misha",
+            age: 35,
+            getName: function () {
+                return this.name;
+            }
+        }
+        console.log (obj.getName);
+
+        ////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
+
+        const arr = [1, 2, 3];
+
+        arr.push(4);
+        pop
+        shift
+        unshift
+
+        ////
+
+        arr.toString();
+
+        arr1.forEach(function (item1, index1, arr1) {
+        console.log ("item", item1);
+        console.log ("item", index1);
+        console.log ("arr", arr1);
+
+        }
+
+        arr1.forEach((item) => {
+        console.log (item)
+        })
+
+        const arr = [1, "222", 3]; 
+
+        arr.find (item) => {
+            return item === 3
+        })
+
+        arr.some ((item) => {  /// true or false
+            return item === 2
+        })
+
+        arr.map ((user, i, arr) => {  /// новый массив
+            return Number (item) * 2;
+        })
+        ////
+        оперетор разворота
+        ...arr, ...3, 3
+
+
+
+ 
+        </script>
+    </div>
+</body>
+
+</html> 
