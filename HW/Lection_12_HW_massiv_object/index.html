@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lection_12_HW_massiv_object</title>
+</head>
+
+<body>
+    <script>
+        //// _________________________01_________________________
+        //// Дан объект с городами и странами. Вывести масив значения в котором будут строки 
+        //// преобразованные в данный формат: <Столица> - это <Страна>.
+        //// const result = ['Киев - это Украина', 'Нью-Йорк - это США', ... и т.д.]
+
+        console.log ("************** 1st ***************");
+        const citiesAndCountries = {
+            'Киев': 'Украина',
+            'Нью-Йорк': 'США',
+            'Амстердам': 'Нидерланды',
+            'Берлин': 'Германия',
+            'Париж': 'Франция',
+            'Лиссабон': 'Португалия',
+            'Вена': 'Австрия',
+        };
+        let resultArr = [];
+        for (let property in citiesAndCountries) {
+            // console.log(`${property}, ${citiesAndCountries[property]}`);
+            resultArr.push (`${property} - это ${citiesAndCountries[property]}`)
+        }
+        const RESULT = resultArr;
+        console.log(RESULT);
+
+        //// _________________________02_________________________
+        //// Создать функцию которая выведет многомерный массив A. Данный массив содержит в себе список других массивов B. 
+        //// Массивы B должны содержать по 3 значения. Максимальное значение (в примере это переменная amount) должно делится на 3 нацело.
+        //// Вариант 1
+        //// function getArray(){
+        ////    const amount = 9;
+        ////    ... Your code
+        //// }
+        //// getArray() // выведет в консоль [ [1,2,3], [4,5,6], [7,8,9] ].
+        //// Вариант 2
+        //// function getArray(){
+        //// const amount = 12;
+        //// ... Your code
+        //// }
+        //// getArray() // выведет в консоль [ [1,2,3], [4,5,6], [7,8,9], [10,11,12] ].
+
+        console.log ("************** 2nd ***************");
+        // const amount = 9;
+        function getArray (arrayLength) {
+            let arrayA = [];
+            let arrayB = [];
+            let count = 1;
+
+            for (let i = 0; i < arrayLength / 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    arrayB.push(count);
+                    count++;
+                }
+                arrayA.push(arrayB);
+                arrayB = [];
+            }
+            console.log (arrayA); //// 1
+
+            let arrToConsole = '';
+            for (let k = 0; k < arrayA.length; k++) {
+                console.log (arrayA[k]); //// 2
+                arrToConsole += `[${arrayA[k].toString()}], `; //// 4a
+            } 
+            console.log (arrayA.toString()); //// 3
+            let lastComma = arrToConsole.lastIndexOf(','); //// 4b
+            arrToConsole = arrToConsole.slice(0, lastComma); //// 4c
+            console.log (`[ ${arrToConsole} ].`); //// 4d
+        }
+
+        getArray(12);
+
+        //// _________________________03_________________________
+
+        console.log ("************** 3rd ***************");
+
+
+
+
+
+
+
+
+
+        // let person = {
+        //     firstName: 'Jake',
+        //     lastName: 'Mitchel',
+        //     birthDate: '04.09.2001'
+        // };
+
+        // for(let property in person)
+        // console.log(`Property: ${property}, value: ${person[property]}`);
+  
+/*
+Результат в консоли:
+  
+Property: firstName, value: Jake
+Property: lastName, value: Mitchel
+Property: birthDate, value: 04.09.2001
+*/
+
+
+
+
+
+        
+
+
+
+
+    </script>
+
+</body>
+
+</html>
