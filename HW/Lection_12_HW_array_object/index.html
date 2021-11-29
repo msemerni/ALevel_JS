@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lection_12_HW_array_object</title>
+</head>
+
+<body>
+    <h4>Lection_12_HW_array_object</h4>
+    <p>See Console</p>
+    <script>
+        //// _________________________01_________________________
+        //// Дан объект с городами и странами. Вывести масив значения в котором будут строки
+        //// преобразованные в данный формат: <Столица> - это <Страна>.
+        //// const result = ['Киев - это Украина', 'Нью-Йорк - это США', ... и т.д.]
+
+        console.log ("************** 1st ***************");
+        const citiesAndCountries = {
+            'Киев': 'Украина',
+            'Нью-Йорк': 'США',
+            'Амстердам': 'Нидерланды',
+            'Берлин': 'Германия',
+            'Париж': 'Франция',
+            'Лиссабон': 'Португалия',
+            'Вена': 'Австрия',
+        };
+        let resultArr = [];
+        for (let property in citiesAndCountries) {
+            // console.log(`${property}, ${citiesAndCountries[property]}`);
+            resultArr.push (`${property} - это ${citiesAndCountries[property]}`)
+        }
+        const RESULT = resultArr;
+        console.log(RESULT);
+
+        //// _________________________02_________________________
+        //// Создать функцию которая выведет многомерный массив A. Данный массив содержит в себе список других массивов B.
+        //// Массивы B должны содержать по 3 значения. Максимальное значение (в примере это переменная amount) должно делится на 3 нацело.
+        //// Вариант 1
+        //// function getArray(){
+        ////    const amount = 9;
+        ////    ... Your code
+        //// }
+        //// getArray() // выведет в консоль [ [1,2,3], [4,5,6], [7,8,9] ].
+        //// Вариант 2
+        //// function getArray(){
+        //// const amount = 12;
+        //// ... Your code
+        //// }
+        //// getArray() // выведет в консоль [ [1,2,3], [4,5,6], [7,8,9], [10,11,12] ].
+
+        console.log ("************** 2nd ***************");
+        function getArray (arrayLength) {
+            let arrayA = [];
+            let arrayB = [];
+            let count = 1;
+
+            for (let i = 0; i < arrayLength / 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    arrayB.push(count);
+                    count++;
+                }
+                arrayA.push(arrayB);
+                arrayB = [];
+            }
+            console.log (arrayA); //// 1
+
+            let arrToConsole = '';
+            for (let k = 0; k < arrayA.length; k++) {
+                console.log (arrayA[k]); //// 2
+                arrToConsole += `[${arrayA[k].toString()}], `; //// 4a
+            }
+            console.log (arrayA.toString()); //// 3
+            let lastComma = arrToConsole.lastIndexOf(','); //// 4b
+            arrToConsole = arrToConsole.slice(0, lastComma); //// 4c
+            console.log (`[ ${arrToConsole} ].`); //// 4d
+        }
+
+        getArray(12);
+
+        //// _________________________03_________________________
+        //// Cоздать объект с названиями дней недели. Где ключами будут ru и en, a значением свойства ru будет массив
+        //// с названиями дней недели на русском, а en - на английском. После написать функцию которая будет выводить в консоль
+        //// название дня недели пользуясь выше созданным объектом.
+        //// Все дни недели начинаются с 1 и заканичаются цифрой 7 (1- понедельник, 7 - воскресенье).
+        //// Функция хранит переменную lang - название языка дня недели и переменную day - число дня недели.
+        //// Пример 1
+        //// function getNameOfDay(){
+        ////     const lang = 'en';
+        ////     const day = 7;
+        ////     ... Your code
+        //// }
+        //// getNameOfDay() /// 'Sunday'
+        //// ------------------------------------------------
+        //// // Пример 2
+        //// function getNameOfDay(){
+        ////     const lang = 'ru';
+        ////     const day = 3;
+        ////     ... Your code
+        //// }
+        //// getNameOfDay() /// 'Среда'
+
+        console.log ("************** 3rd ***************");
+        const namesOfDays = {
+            ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+            en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' , 'Sunday'],
+        }
+
+        function getNameOfDay(language, dayOfWeek) {
+            if (language === "en") {
+                const lang = namesOfDays.en;
+                const day = dayOfWeek;
+                console.log(lang[day - 1])
+            }
+            else if (language === "ru") {
+                const lang = namesOfDays.ru;
+                const day = dayOfWeek;
+                console.log(lang[day - 1])
+            }
+        }
+
+            getNameOfDay("en", 7);
+            getNameOfDay("ru", 3);
+
+        //// _________________________04_________________________
+        //// Создайте функцию, которая возвращает сумму двух наименьших положительных чисел из массива
+        //// минимум 4 положительных целых чисел.
+        //// Не передаются числа с плавающей запятой или неположительные целые числа.
+        //// В массиве не могут содержаться одинаковые числа.
+        //// Например, когда массив передается как [19, 5, 42, 2, 77], вывод должен быть 7
+        //// [10, 800, 3453000, 8010]должен вернуться 810
+        //// [12, 898, 899, 900]должен вернуться 910
+
+        console.log ("************** 4th ***************");
+        let myArray1 = [19, 5, 42, 2, 77]; // 7
+        let myArray2 = [10, 800, 3453000, 8010]; // 810
+        let myArray3 = [12, 898, 899, 900]; // 910
+
+        function getSumOfTwoMinNumbers (someArray) {
+
+            function compareNumeric(a, b) {
+                if (a > b) return 1;
+                if (a == b) return 0;
+                if (a < b) return -1;
+                }
+
+            someArray.sort(compareNumeric);
+            let sum = someArray[0] + someArray [1];
+            console.log (sum);
+        }
+
+        getSumOfTwoMinNumbers (myArray1);
+        getSumOfTwoMinNumbers (myArray2);
+        getSumOfTwoMinNumbers (myArray3);
+
+        //// _________________________05_________________________
+        //// Дан массив единиц и нулей, преобразуйте эквивалентное двоичное значение в целое число.
+        //// Например: [0, 0, 0, 1]рассматривается как 0001двоичное представление 1.
+        //// Testing: [0, 0, 0, 1] ==> 1
+        //// Testing: [0, 0, 1, 0] ==> 2
+        //// Testing: [0, 1, 0, 1] ==> 5
+        //// Testing: [1, 0, 0, 1] ==> 9
+        //// Testing: [0, 0, 1, 0] ==> 2
+        //// Testing: [0, 1, 1, 0] ==> 6
+        //// Testing: [1, 1, 1, 1] ==> 15
+        //// Testing: [1, 0, 1, 1] ==> 11
+        //// Однако массивы могут иметь разную длину, не ограничиваясь только ими 4
+        //// Testing: [1, 0, 0, 0, 1] ==> 17
+        //// Testing: [1, 0, 0, 1, 0] ==> 18
+        //// Testing: [1, 0, 1, 0, 1] ==> 21
+        //// Testing: [1, 1, 1, 0, 0, 1] ==> 57
+
+        console.log ("************** 5th ***************");
+        let arrayTest1 = [0, 0, 0, 1];
+        let arrayTest2 = [0, 0, 1, 0];
+        let arrayTest3 = [0, 1, 0, 1];
+        let arrayTest4 = [1, 0, 0, 1];
+        let arrayTest5 = [0, 0, 1, 0];
+        let arrayTest6 = [0, 1, 1, 0];
+        let arrayTest7 = [1, 1, 1, 1];
+        let arrayTest8 = [1, 0, 1, 1];
+        let arrayTest9 = [1, 0, 0, 0, 1];
+        let arrayTest10 = [1, 0, 0, 1, 0];
+        let arrayTest11 = [1, 0, 1, 0, 1];
+        let arrayTest12 = [1, 1, 1, 0, 0, 1];
+
+        function convertFrom2To10Easy(someArray) {
+            let numberInTwoSystem = someArray.toString().replaceAll(",", "");
+            numberInTenSystem = parseInt (numberInTwoSystem, 2);
+            console.log (numberInTenSystem);
+        }
+
+        function convertFrom2To10Hard(someArray) {
+            let numberInTenSystem = 0;
+            let rank = 0;
+            for (let i = someArray.length-1; i >= 0; i--) {
+                numberInTenSystem += someArray[i]*2**rank;
+                rank++;
+            }
+            console.log (numberInTenSystem);
+        }
+
+        convertFrom2To10Easy (arrayTest12);
+
+        convertFrom2To10Hard (arrayTest1);
+        convertFrom2To10Hard (arrayTest2);
+        convertFrom2To10Hard (arrayTest3);
+        convertFrom2To10Hard (arrayTest4);
+        convertFrom2To10Hard (arrayTest5);
+        convertFrom2To10Hard (arrayTest6);
+        convertFrom2To10Hard (arrayTest7);
+        convertFrom2To10Hard (arrayTest8);
+        convertFrom2To10Hard (arrayTest9);
+        convertFrom2To10Hard (arrayTest10);
+        convertFrom2To10Hard (arrayTest11);
+        convertFrom2To10Hard (arrayTest12);
+
+    </script>
+
+</body>
+
+</html>
