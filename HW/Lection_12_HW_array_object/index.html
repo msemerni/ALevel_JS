@@ -11,6 +11,7 @@
 <body>
     <h4>Lection_12_HW_array_object</h4>
     <p>See Console</p>
+
     <script>
         //// _________________________01_________________________
         //// Дан объект с городами и странами. Вывести масив значения в котором будут строки
@@ -188,6 +189,8 @@
 
         function convertFrom2To10Easy(someArray) {
             let numberInTwoSystem = someArray.toString().replaceAll(",", "");
+            // let numberInTwoSystem = someArray.join("");
+
             numberInTenSystem = parseInt (numberInTwoSystem, 2);
             console.log (numberInTenSystem);
         }
@@ -217,7 +220,171 @@
         convertFrom2To10Hard (arrayTest11);
         convertFrom2To10Hard (arrayTest12);
 
+        ///// Дополнительно:
+        //// _________________________6_________________________
+        //// Реверс массива (+ копирование)
+        console.log ("************** 6th ***************");
+        let reverseTestArray1 = [1, 2, 3, 4, 5];
+        let reverseTestArray2 = "привет как дела"; 
+        
+        function reverseArray(someArray) {
+            let reversedArray = [];
+
+            for (let i = someArray.length-1; i >= 0; i--) {
+                reversedArray.push(someArray[i]);
+            }
+            // console.log (reversedArray.toString().replaceAll(",", ""));
+            console.log (reversedArray.join(""));
+        }
+
+        reverseArray (reverseTestArray1);
+        reverseArray (reverseTestArray2);
+
+        // let reverseTestArray3 = reverseTestArray2.slice().split(" ").reverse().toString().replaceAll(",", " ");
+        let reverseTestArray3 = reverseTestArray2.slice().split(" ").reverse().join(" ");
+        console.log (reverseTestArray3);
+
+
+        // const cloneSheeps = sheeps.slice();
+        // const cloneSheeps = Array.from(sheeps);
+        // const cloneSheeps = [...sheeps];
+
+        // const cloneSheeps = {}
+        //     cloneSheeps.prototype = sheeps.prototype;
+        // const cloneSheeps = Object.assign({}, sheeps);
+        // const cloneSheeps = {...sheeps};
+
+        //let cloneSheeps = JSON.parse(JSON.stringify(sheeps)) ////копировать многомерный массив или объект
+
+        ////фильтр:
+        // let arr = [3, 5, 12, 9, 23, 93, 17];
+        // let filteredArr = arr.filter(el => el <= 10); // [3, 5, 9]
+        
     </script>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+ <input type="text" name="" id="inp">
+
+<script>
+
+// let arrW = [3, 5, 12, 9, 23, 93, 17];
+// let newArr1 = arrW.filter(el => el <= 10); // [3, 5, 9]
+// console.log (arrW);
+// console.log (newArr1);
+
+
+// let arrE = [7, 6, 3, 5, 8, 2];
+// let sum11 = arrE.reduce((acc, value) => acc * value, 1); // 31
+// console.log (arrE);
+// console.log (sum11);
+
+// function sum(...numbers){
+//     return numbers.reduce(function(item, currentValue)
+//     {
+//     return currentValue + item;
+//     });
+// }
+
+// sum(4, 6, 8); // 6
+// sum(1, 2, 3, 4, 5); // 15
+
+// let arrowFunc = function summ (a, b) {
+//   return a + b;
+// };
+// let res = arrowFunc(3, 7);
+
+// let arrowFunc = (a, b) => {
+//   return a + b;
+// };
+// let res = arrowFunc(3, 7);
+
+// window.addEventListener('click', function() {alert('Click is detected');});
+
+// window.addEventListener('click', event => alert('Click is detected'));
+
+// let arrSP = ['a', 'd', 'e'];
+
+// let deletedItems = arrSP.splice(1, 0, "Q", "W", "E"); // []
+// console.log(deletedItems); 
+// console.log(arrSP); 
+// ['a', 'b', 'c', 'd', 'e']
+// let arrS = ['b', 'c', 'a', 'e', 'd'];
+// let arrSSS = arrS.sort();
+// console.log(arrS);
+// console.log(arrSSS); // ['a', 'b', 'c', 'd', 'e']
+
+
+// window.a = 9;
+
+// getA = () => this.a;
+
+// let obj = {
+//   a: 5,
+//   getA
+// };
+
+// obj.getA(); // 9
+
+// function func(){
+//   alert(this === window);
+// }
+// func();
+
+// function printMessage(){
+//   console.log(this.message);
+// }
+
+// let obj = {
+//   message: 'JavaScript',
+//   printMessage
+// };
+
+// obj.printMessage(); // 'JavaScript'
+
+// let a = 1;
+// alert(`document: a = ${a}`); // document: a = 5
+
+// if(true){
+//   let a = 5;
+//   alert(`if: a = ${a}`); // if: a = 5
+// }
+
+// for(let i = 0; i < 1; i++){
+//   let a = i;
+//   alert(`for: a = ${a}`); // for: a = 0
+// }
+
+// function someFunction(){
+//   let a = 3;
+//   alert(`function: a = ${a}`); // function: a = 3
+// }
+// someFunction();
+
+// function someFunc1(a, b, c) {
+//   return arguments;
+// }
+// function someFunc2(...params) {
+//   return arguments;
+// }
+// console.log (someFunc1('Hello', 1, true)); // ['Hello', 1, true]
+// console.log (someFunc2(1, 2, 3)); // [1, 2, 3]
+
+
+// let s2 = multiply(3, 9); // 27
+// console.log(s2);
+
+
+
+// let arrowFunc = (a, b) => {
+//   return a + b;
+// };
+// arrowFunc(3, 7); // 10
+// console.log (sum(1, 2, 3)); // 6
+// console.log (sum(1, 2, 3, 4, 5)); // 15
+
+</script>
+
 
 </body>
 
