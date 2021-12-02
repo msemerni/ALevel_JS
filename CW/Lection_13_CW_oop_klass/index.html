@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_13_CW</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h4>Lesson_13_CW</h4>
+        <script>
+            // const symbol1 = Symbol("id"); //new Symbol
+            // const symbol2 = Symbol("id");
+            // symbol1 === symbol2 //false т.к. создается уникальное значение
+
+            ////////
+            // Math.floor(Math.random()*1000);
+
+
+            // let a = 8;
+            // if (a < 10 && a > 5) {    // всегда использовать двойное И (&&), т.к. & это побитовые операции
+            //     console.log("a<10 and a>5");
+            // }
+            // else {
+            //     console.log("No");
+            // }
+
+            ////////
+
+            let obj = { mark: 'Mercedes', model: 'C180' }
+            let objKeys = Object.keys(obj);
+            let objValues = Object.values(obj);
+            console.log(objKeys);
+            console.log(objValues);
+
+            ////////
+
+            let person = {
+                firstName: 'aaa',
+                lastName: 'bbb',
+                getFullName: function () {
+                    return `${this.firstName} ${this.lastName}`;
+                }
+            };
+
+            //// proto - устаревший способ
+            let driver = {
+                __proto__: person,
+                driveExperience: 5
+            };
+
+            // driver.firstName = 'John';
+            driver.lastName = 'Malkovich';
+            console.log(driver.getFullName());
+            console.log(person.getFullName());
+
+            ///// современный способ (методами):
+            let person2 = {
+                firstName: 'ccc',
+                lastName: 'ddd',
+                getFullName: function () {
+                    return `${this.firstName} ${this.lastName}`;
+                }
+            };
+
+            let driver2 = {
+                driveExperience: 5
+            };
+
+            Object.setPrototypeOf(driver2, person2);
+
+            driver2.firstName = 'John';
+            driver2.lastName = 'Malkovich';
+
+            console.log(driver2.getFullName());
+            console.log(driver2.driveExperience);
+            console.log(person2.getFullName());
+
+            let prottto = Object.getPrototypeOf(person2);
+            console.log(prottto);
+
+
+
+
+
+
+        </script>
+    </div>
+</body>
+
+</html>

@@ -77,6 +77,7 @@
             let lastComma = arrToConsole.lastIndexOf(','); //// 4b
             arrToConsole = arrToConsole.slice(0, lastComma); //// 4c
             console.log (`[ ${arrToConsole} ].`); //// 4d
+            console.log(...arrayA); //// 5
         }
 
         getArray(12);
@@ -244,7 +245,7 @@
         let reverseTestArray3 = reverseTestArray2.slice().split(" ").reverse().join(" ");
         console.log (reverseTestArray3);
 
-        
+
         // const cloneSheeps = sheeps.slice();
         // const cloneSheeps = Array.from(sheeps);
         // const cloneSheeps = [...sheeps];
@@ -253,8 +254,10 @@
         //     cloneSheeps.prototype = sheeps.prototype;
         // const cloneSheeps = Object.assign({}, sheeps);
         // const cloneSheeps = {...sheeps};
+        //// assign и {...sheeps} - копирование только для первого уровня вложенности
 
         //let cloneSheeps = JSON.parse(JSON.stringify(sheeps)) ////копировать многомерный массив или объект
+        // но трудозатратно. лучше пользоваться библиотеками
 
         ////фильтр:
         // let arr = [3, 5, 12, 9, 23, 93, 17];
