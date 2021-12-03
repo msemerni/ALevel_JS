@@ -66,17 +66,21 @@
 
         console.log("************** 3rd ***************");
 
-        // let createEmployesFromArr = (arr) => {
+        let createEmployesFromArr = (arr) => {
 
-        // };
-        // const emplyeeConstructArr = createEmployesFromArr(emplyeeArr);
+            var myArr = [];
+            for (var i = 0; i < arr; i++) {
+                myArr.push(new Employee(i));
+                let mA = myArr;
+            }
+        };
+        const emplyeeConstructArr = createEmployesFromArr(emplyeeArr);
+        console.log(emplyeeConstructArr);
 
-        let arrNew = Array.from(employeeArr)
+        // let arrNew = Array.from(employeeArr)
 
-        let ddd = emplyeeArr;
-        console.log(ddd);
-        
-
+        // let ddd = emplyeeArr;
+        // console.log(ddd);
 
 
 
