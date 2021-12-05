@@ -1,4 +1,4 @@
-const emplyeeArr = [
+export const emplyeeArr = [
     {
         id: 1,
         name: 'Денис',
