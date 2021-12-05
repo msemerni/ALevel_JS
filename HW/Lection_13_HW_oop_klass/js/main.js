@@ -180,22 +180,6 @@ employeeObj.fullInfo = {name: 'Вася', salary: 9000, email: 'ex@mail.ua'};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////// 02 Перечисление свойств ////////////////////////////////////////////////////////
 // // const me = new Employee(1, "Misha", "Semernin", 1800, 12, true, "Male");
 // // me.getFullName();
