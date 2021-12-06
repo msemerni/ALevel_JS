@@ -155,17 +155,46 @@ Object.defineProperty(employeeObj, 'fullInfo', {
 
         // const {id, name, surname, salary, workExperience, isPrivileges, gender} = employeeObj;
         // console.log(id, name, surname, salary, workExperience, isPrivileges, gender);
-
     },
-    set: function (...params) {
-        this.name = params[0];
-        console.log(this.name);
-        return this.name;
+    
+    set: function (newObjValues) {
+        Object.defineProperties(employeeObj, {
+            id: {
+                // if (newObjValues.hasOwnProperty("id"))
+                // if (newObjValues !== "underfined")
+                // if ("id" in newObjValues)
+                value: newObjValues.id
+            },
+            name: {
+                value: newObjValues.name
+            },
+            surname: {
+                value: newObjValues.surname
+            },
+            salary: {
+                value: newObjValues.salary
+            },
+            workExperience: {
+                value: newObjValues.workExperience
+            },
+            isPrivileges: {
+                value: newObjValues.isPrivileges
+            },
+            gender: {
+                value: newObjValues.gender
+            },
+
+        });
+        console.log(employeeObj);
+        return employeeObj;
     }
 });
 
-employeeObj.fullInfo;
-employeeObj.fullInfo = {name: 'Вася', salary: 9000, email: 'ex@mail.ua'};
+Object.preventExtensions(employeeObj);
+
+employeeObj.fullInfo; // getter
+employeeObj.fullInfo = { name: 'Вася', salary: 9000, email: 'ex@mail.ua' }; // setter
+console.log(`New object: ${Object.entries(employeeObj)}`);
 
 
 
