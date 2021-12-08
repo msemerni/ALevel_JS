@@ -13,7 +13,7 @@
 ////   etc.
 
 console.log("************** 1st ***************");
-
+import { employeeArr } from "./employeearr.js";
 // function Employee(id, name, surname, salary, workExperience, isPrivileges, gender) {
 //     this.id = id;
 //     this.name = name;
@@ -23,9 +23,62 @@ console.log("************** 1st ***************");
 //     this.isPrivileges = isPrivileges;
 //     this.gender = gender;
 // }
+/////////////////////////////////////////////////////////////////////////
+// class EmployeeClass {
+//     #id = "UNKNOWN";
+//     #name = "UNKNOWN";
+//     #surname = "UNKNOWN";
+//     #salary = "UNKNOWN";
+//     #workExperience = "UNKNOWN";
+//     #isPrivileges = "UNKNOWN";
+//     #gender = "UNKNOWN";
+
+//     constructor(someArray) {
+//         this.id = someArray.id;
+//         this.name = someArray.name;
+//         this.surname = someArray.surname;
+//         this.salary = someArray.salary;
+//         this.workExperience = someArray.workExperience;
+//         this.isPrivileges = someArray.isPrivileges;
+//         this.gender = someArray.gender;
+//     }
+
+//     get id() { return this.#id; }
+//     set id(value) {
+//         if (typeof(value) === "number") {
+//             this.#id = value; 
+//         }
+//     }
+//     get name() { return this.#name; }
+//     set name(value) {
+//         if (typeof(value) === "string") {
+
+//             this.#name = value; 
+//         }
+//     }
+//     get surname() { return this.#surname; }
+//     set surname(value) { this.#surname = value; }
+//     get salary() { return this.#salary; }
+//     set salary(value) { this.#salary = value; }
+//     get workExperience() { return this.#workExperience; }
+//     set workExperience(value) { this.#workExperience = value; }
+//     get isPrivileges() { return this.#isPrivileges; }
+//     set isPrivileges(value) { this.#isPrivileges = value; }
+//     get gender() { return this.#gender; }
+//     set gender(value) { this.#gender = value; }
+
+// }
+
+// const myProfile = new EmployeeClass({id: 1, name: "Misha", surname: "Semernin", salary: 1800, workExperience: 12, isPrivileges: true, gender: "male" });
+// console.log(myProfile);
 
 function Employee(someArray) {
-    this.id = someArray.id;
+    if (someArray.hasOwnProperty("id")) {
+        this.id = someArray.id;
+    }
+    // else {
+    //     this.id = "UNKNOWN";
+    // }
     this.name = someArray.name;
     this.surname = someArray.surname;
     this.salary = someArray.salary;
@@ -33,9 +86,10 @@ function Employee(someArray) {
     this.isPrivileges = someArray.isPrivileges;
     this.gender = someArray.gender;
 }
-//// console.log(Object.getOwnPropertyNames(Employee)); как получить список свойств Employee без создания экземпляра? => никак
-const me = new Employee({id: 1, name: "Misha", surname: "Semernin", salary: 1800, workExperience: 12, isPrivileges: true, gender: "male"});
-console.log(Object.getOwnPropertyNames(me));
+//// console.log(Object.getOwnPropertyNames(Employee)); как получить список свойств Employee без создания экземпляра? => никак?
+const employeeObjMe = {id: 1, name: "Misha", surname: "Semernin", salary: 1800, workExperience: 12, isPrivileges: true, gender: "male" };
+const me = new Employee(employeeObjMe);
+console.log(Object.entries(me));
 
 //// _________________________02_________________________
 //// Добавить функции - конструктору метод (помним про prototype): getFullName 
@@ -59,13 +113,12 @@ console.log(me.getFullName());
 //// const emplyeeConstructArr = createEmployesFromArr(employeeArr) /// [{id: 0, name: 'Valeriy', surname: 'Zhmishenko', salary: 1000,  workExperience: 10,  isPrivileges: true, gender:'male' }]
 
 console.log("************** 3rd ***************");
-import { employeeArr } from "./employeearr.js";
 let createEmployesFromArr = (arr) => {
     const myArr = [];
     for (var i = 0; i < arr.length; i++) {
         // myArr.push(new Employee(arr[i].id, arr[i].name, arr[i].surname, arr[i].salary,
         //     arr[i].workExperience, arr[i].isPrivileges, arr[i].gender));
-        myArr.push(arr[i]);
+        myArr.push(new Employee (arr[i]));
     }
     return myArr;
 };
@@ -156,14 +209,19 @@ Object.defineProperty(employeeObj, 'fullInfo', {
         // const {id, name, surname, salary, workExperience, isPrivileges, gender} = employeeObj;
         // console.log(id, name, surname, salary, workExperience, isPrivileges, gender);
     },
-    
+    // set: function () {
+    //     Object.entities().forEach(([key, value]))
+    //     if (value) {
+    //         employeeObj[key] = value
+    //     }
+    // }
     set: function (newObjValues) {
         Object.defineProperties(employeeObj, {
             id: {
                 // if (newObjValues.hasOwnProperty("id"))
                 // if (newObjValues !== "underfined")
                 // if ("id" in newObjValues)
-                value: newObjValues.id
+                value: this.id
             },
             name: {
                 value: newObjValues.name
@@ -193,7 +251,7 @@ Object.defineProperty(employeeObj, 'fullInfo', {
 Object.preventExtensions(employeeObj);
 
 employeeObj.fullInfo; // getter
-employeeObj.fullInfo = { name: 'Вася', salary: 9000, email: 'ex@mail.ua' }; // setter
+employeeObj.fullInfo = {id: 333333, name: 'Вася', salary: 9000, email: 'ex@mail.ua' }; // setter
 console.log(`New object: ${Object.entries(employeeObj)}`);
 
 
@@ -232,3 +290,4 @@ console.log(`New object: ${Object.entries(employeeObj)}`);
 // // for (prop in me) {
 // //     console.log(`${prop}: ${me[prop]}`); // все перечисляемые свойства объекта и его цепочка прототипов
 // // }
+// // console.log(Object.entries(me));
