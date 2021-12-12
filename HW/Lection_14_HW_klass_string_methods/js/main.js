@@ -93,11 +93,11 @@ const studentArr = [{
 let idCounter = 1;
 
 class Student {
-    #isSelfPayment;
-    constructor(enrollee) {
+    // #isSelfPayment;
 
+    constructor(enrollee) {
         this.id = idCounter++;  //или array.lenght !!!
-        Object.entities(enrollee).forEach(([key, value]) => {
+        Object.entries(enrollee).forEach(([key, value]) => {
             // if (key) {
             //     case: "isSelfPayment":
 
@@ -107,54 +107,234 @@ class Student {
         })
     }
 
-или геттер или в конструкторе ифами
+
+    // или геттер или в конструкторе ифами
 
 
-    get isSelfPayment() {           // ??
-        return this.#isSelfPayment;
-    }
-    set isSelfPayment() {     // ??
-        if (ratingPoint >= 800 && func123) {
-            this.#isSelfPayment = false;
-        }
-    }
-    func123 
-    array.forEach(element => {
-        проверяем весь массив
-    });
-
-    или counter++
- 
-
-
-
-
-    constructor(enrollee) {
-        // this.id;
-        this.id = idCounter++; // ??
-        this.name = enrollee.name; // name ??
-        this.surname = surname;
-        this.ratingPoint = ratingPoint;
-        this.schoolPoint = schoolPoint;
-        this.isSelfPayment = isSelfPayment;
-    }
-    // get id() {                   // ??
-    //     return this.id;
+    // get isSelfPayment() {           
+    //     return this.#isSelfPayment;
     // }
-    // set id() {
-    //     if (name) {
-    //         this.id = idCounter++;
+    // set isSelfPayment() {     
+    //     if (ratingPoint >= 800 && func123) {
+    //         this.#isSelfPayment = false;
     //     }
     // }
+    // func123 
+    // array.forEach(element => {
+    //     проверяем весь массив
+    // });
 
-    get isSelfPayment() {           // ??
-        return this.isSelfPayment;
-    }
-    set isSelfPayment() {     // ??
-        if (ratingPoint >= 800) {
-            this.isSelfPayment = false;
-        }
-    }
-
+    //     или counter++
 
 }
+
+
+const studentObj = { id: 1, name: "Misha", surname: "Semernin", salary: 1800, workExperience: 12, isPrivileges: true, gender: "male" };
+const me = new Student(studentObj);
+console.log(Object.entries(me));
+
+
+
+
+
+
+//     constructor(enrollee) {
+//         // this.id;
+//         this.id = idCounter++; // ??
+//         this.name = enrollee.name; // name ??
+//         this.surname = surname;
+//         this.ratingPoint = ratingPoint;
+//         this.schoolPoint = schoolPoint;
+//         this.isSelfPayment = isSelfPayment;
+//     }
+//     // get id() {                   // ??
+//     //     return this.id;
+//     // }
+//     // set id() {
+//     //     if (name) {
+//     //         this.id = idCounter++;
+//     //     }
+//     // }
+
+//     get isSelfPayment() {           // ??
+//         return this.isSelfPayment;
+//     }
+//     set isSelfPayment() {     // ??
+//         if (ratingPoint >= 800) {
+//             this.isSelfPayment = false;
+//         }
+//     }
+
+
+// }
+
+
+
+//// _________________________02_________________________
+//// Реализуйте класс CustomString, который будет иметь следующие методы: метод reverse(), 
+//// который параметром принимает строку, а возвращает ее в перевернутом виде, метод ucFirst(), 
+//// который параметром принимает строку, а возвращает эту же строку, сделав ее первую букву заглавной 
+//// и метод ucWords, который принимает строку и делает заглавной первую букву каждого слова этой строки.
+//// const myString = new CustomString();
+//// myString.reverse('qwerty'); //выведет 'ytrewq'
+//// myString.ucFirst('qwerty'); //выведет 'Qwerty'
+//// myString.ucWords('qwerty qwerty qwerty'); //выведет 'Qwerty Qwerty Qwerty
+
+console.log("************** 2nd ***************");
+let originText = "зубов бояться - в лес не ходить"
+console.log(`Origin text: ${originText}`);
+
+class CustomString {
+    reverse(someString) {
+        //// First option:
+        // let reversedStringArray = [...someString].reverse().join().replaceAll(",", "");
+        // console.log(`Метод reverse(): ${reversedStringArray}`);
+        // return reversedStringArray;
+        //// End First option:
+
+        //// Second option:
+        // let reversedStringArray = [];
+        // let someStringArray = [...someString];
+
+        // for (let i = someStringArray.length - 1; i >= 0; i--) {
+        //     reversedStringArray.push(someStringArray[i]);
+        // }
+
+        // reversedStringArray = reversedStringArray.toString().replaceAll(",", "");
+
+        // console.log(`Метод reverse(): ${reversedStringArray}`);
+        // return reversedStringArray;
+        //// End Second option:
+
+        //// Third option:
+        let reversedString = "";
+        for (let i = someString.length - 1; i >= 0; i--) {
+            reversedString += someString[i];
+        }
+        console.log(`Метод reverse(): ${reversedString}`);
+        return reversedString;
+        //// End Third option:
+    }
+
+    ucFirst(someString) {
+        let someStringArray = [...someString];
+        someStringArray = someStringArray[0].toUpperCase() + someStringArray.slice(1);
+        console.log(`Метод ucFirst(): ${someStringArray}`.replaceAll(",", ""));
+        return someStringArray;
+    }
+
+    ucWords(someString) {
+        //// First option:
+        let someStringArray = someString.split(" ").map(word => word[0].toUpperCase() + word.substring(1)).join(" ");
+        console.log(`Метод ucWords(): ${someStringArray}`);
+        return someStringArray;
+        //// End First option:
+
+        //// Second option: НЕ РАБОТАЕТ ?????????????????????????????????????????????????????????????????????????????????????
+        // const pattern = "()\w+/g"; //
+        // const words = originText.match(pattern);
+        // words.map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
+        // console.log(`Метод reverse(): ${words}`);
+        // return words;
+        //// End Second option:
+    }
+}
+
+const newStringOne = new CustomString();
+newStringOne.reverse(originText);
+newStringOne.ucFirst(originText);
+newStringOne.ucWords(originText);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// regex101
+// regexr.com
+// const words = new RegExp("/b");
+// words.exec("qwerty");
+// let perf = performance.now();
+
+
+
+// let str = "привет как дела";
+// const people1 = [...str];
+// console.log(people1);
+
+
+// str.split(" ").reverse;
+// console.log(str);
+// let str2 = str;
+
+// const users = ["Tom", "Sam", "Bob"];
+
+
+
+
+
+// console.log ("************** 6th ***************");
+// let reverseTestArray1 = [1, 2, 3, 4, 5];
+// let reverseTestArray2 = "привет как дела"; 
+
+// function reverseArray(someArray) {
+//     let reversedArray = [];
+
+//     for (let i = someArray.length-1; i >= 0; i--) {
+//         reversedArray.push(someArray[i]);
+//     }
+//     // console.log (reversedArray.toString().replaceAll(",", ""));
+//     console.log (reversedArray.join(""));
+// }
+
+// reverseArray (reverseTestArray1);
+// reverseArray (reverseTestArray2);
+
+// // let reverseTestArray3 = reverseTestArray2.slice().split(" ").reverse().toString().replaceAll(",", " ");
+// let reverseTestArray3 = reverseTestArray2.slice().split(" ").reverse().join(" ");
+// console.log (reverseTestArray3);
+
+
+//////////////////////////////////////////////////////////////////
+// const string = 'word';
+
+// // Option 1
+// string.split('');
+
+// // Option 2
+// [...string];
+
+// // Option 3
+// Array.from(string);
+
+// // Option 4
+// Object.assign([], string);
+
+// // Result:
+// // ['w', 'o', 'r', 'd']

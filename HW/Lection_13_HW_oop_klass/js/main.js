@@ -247,7 +247,9 @@ Object.defineProperty(employeeObj, 'fullInfo', {
     },
     set: function (newObjValues) {
         Object.entries(newObjValues).forEach(([key, value]) => {
-            if (value && this.hasOwnProperty(key)) {
+            // if (value && this.hasOwnProperty(key)) {
+            if (value){
+
                 this[key] = value;
             }
         });
@@ -259,13 +261,22 @@ employeeObj.fullInfo; // getter
 employeeObj.fullInfo = { id: 222, name: 'Вася новый', salary: 8000}; // setter
 employeeObj.fullInfo; // getter
 
-// Object.preventExtensions(employeeObj); //// не добавляет новый объект если какое-то свойство в передаваемом объекте не было объявленно в классе (пр. Имеил) ??
-
+// Object.preventExtensions(employeeObj); //// не добавляет вообще новый объект если какое-то свойство в передаваемом объекте не было объявленно в классе (пр. Имеил) 
+Object.preventExtensions(employeeObj.fullInfo);
 employeeObj.fullInfo = { id: 333, name: 'Вася новый 2', salary: 9000, email: 'ex@mail.ua' }; // setter
 employeeObj.fullInfo; // getter
 
 // console.log(`New object: ${Object.entries(employeeObj)}`);
+//////////////////////////////////////////
+// let employeeObjMe = { id: 1, name: "Misha", surname: "Semernin", salary: 1800, workExperience: 12, isPrivileges: true, gender: "male" };
+// let me = new Employee(employeeObjMe);
+// console.log(Object.entries(me));
+// me.email = "email@com.ua";
+// console.log(Object.entries(me));
 
+// Object.preventExtensions(me);
+// me.phone = "066-12345678";
+// console.log(Object.entries(me));
 
 
 
