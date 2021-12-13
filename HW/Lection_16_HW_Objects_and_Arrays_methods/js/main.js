@@ -1,1 +1,8 @@
-﻿//// _________________________01_________________________
+﻿import { condidateArr } from "./candidates.js";
+// console.log(condidateArr.length);
+
+
+
+
+
+
