@@ -1,4 +1,3 @@
-
 export const condidateArr = [
     {
         "_id": "5e216bc9a6059760578aefa4",
