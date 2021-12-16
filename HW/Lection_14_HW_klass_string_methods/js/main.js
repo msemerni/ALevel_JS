@@ -215,10 +215,12 @@ class CustomString {
         //// End First option:
 
         //// Second option: НЕ РАБОТАЕТ ?????????????????????????????????????????????????????????????????????????????????????
-        // const pattern = "()\w+/g"; //
-        // const words = originText.match(pattern);
+        // let pattern = /\w+/g;
+        // console.log(pattern);
+        // let words = someString.match(pattern);
+        // console.log(words);
         // words.map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
-        // console.log(`Метод reverse(): ${words}`);
+        // console.log(`Метод ucWords(): ${words}`);
         // return words;
         //// End Second option:
     }
@@ -228,8 +230,6 @@ const newStringOne = new CustomString();
 newStringOne.reverse(originText);
 newStringOne.ucFirst(originText);
 newStringOne.ucWords(originText);
-
-
 
 //// _________________________03_________________________
 
