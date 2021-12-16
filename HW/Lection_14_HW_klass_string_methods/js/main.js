@@ -231,8 +231,21 @@ newStringOne.ucWords(originText);
 
 
 
+//// _________________________03_________________________
 
+//// Реализуйте класс Validator, который будет проверять строки. 
+//// К примеру, у него будет метод checkIsEmail() параметром принимает строку и проверяет, 
+//// является ли она емейлом или нет. Если является - возвращает true, если не является - то false. 
+//// Кроме того, класс будет иметь следующие методы: метод checkIsDomain для проверки домена, 
+//// метод checkIsDate для проверки даты и метод checkIsPhone для проверки телефона:
+//// var validator = new Validator();
+//// validator.checkIsEmail('vasya.pupkin@gmail.com'); // true
+//// validator.checkIsDomain('google.com'); // true
+//// validator.checkIsDate('30.11.2019'); // true
+//// validator.checkIsPhone('+38 (066) 937-99-92'); // если код страны Украинский, то возвращаем true иначе false
 
+console.log("************** 3rd ***************");
+console.log("NOT DONE");
 
 
 
