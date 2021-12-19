@@ -9,9 +9,12 @@ box-sizing: inherit;
 }
 
 body {
-    /* margin: 0; */
-    margin: 0, auto;
+    margin: 0;
     font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     /* line-height: 1.5; */
 }
 
@@ -43,29 +46,16 @@ form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    max-width: 300px;
+    align-items: center;
 } 
 
 input {
     margin: 5px;
 }
 
-/* .col {
-    width: 25%;
-    padding: 0 15px 30px;
-} */
-
-  /* всё выше по умолчанию для flex*/
-
-  /* .aside { */
-    /* display: flex; */
-
-    /* flex-basis: 210px; не работает*/
-    /* max-width: 210px; */
-    /* width: 100%; */
-    /* так работает (см.выше) */
-
-    /* justify-content: center; если флекс*/
-    /* padding: 10px;
-    text-align: center;
-  } */
+button {
+    background-color: greenyellow;
+    border-radius: 10px;
+    padding: 5px 10px 5px;
+    margin: 10px;
+}
