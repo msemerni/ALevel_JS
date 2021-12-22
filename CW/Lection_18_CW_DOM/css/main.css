@@ -1,0 +1,28 @@
+h4 {
+    font-size: 1rem;
+}
+
+.searchPanel, .firstPanel, .secondPanel, .thirdPanel, .basket {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.basket a {
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+.basket-full {
+    color: red;
+}
+
+button {
+    margin: 5px 0 5px 0;
+}
+
+.img-container {
+    flex-grow: 1;
+}
