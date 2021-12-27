@@ -27,15 +27,15 @@ function getBonus(someNumber) {
     let allDigits = [];
     let evenSum = 0;
     let oddSum = 0;
-    
+
     //получение всех цифр промокода
     for (let i = 7; i >= 0; i--) {
         allDigits[i] = Math.floor(promoNumber % 10);
         promoNumber /= 10;
     }
-    console.log(allDigits);
+    // console.log(allDigits);
     //если число целое и восьмизначное
-    if ( ((someNumber ^ 0) === someNumber) && (Math.floor(promoNumber) === 0) ) {
+    if (((someNumber ^ 0) === someNumber) && (Math.floor(promoNumber) === 0)) {
         ////////////////////создание массива всех нечетных двузначных + однозначных (чет и нечет) чисел///////////
         let oddPairsAndOthers = [];
         for (let i = 0; i < allDigits.length - 1; i++) {
@@ -75,7 +75,7 @@ function getBonus(someNumber) {
         if (oddPairs.length > 1) {
             let pairGrowCounter = 0;
             for (num of oddPairs) {
-                if ((parseInt(num / 10)) < (num % 10)) {
+                if ((Math.floor(num / 10)) < (num % 10)) {
                     pairGrowCounter++;
                 }
             }
@@ -105,7 +105,6 @@ function getBonus(someNumber) {
             };
         }
     }
-
     else {
         return 0;
     };
