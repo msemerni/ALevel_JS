@@ -1,7 +1,7 @@
 const container = document.getElementById("container");
 const promoButton = document.getElementById("promoButton");
-const alertPromo = document.getElementById("resultBox");
-// container.appendChild(alertPromo);
+const alertPromo = document.createElement("resultBox");
+container.appendChild(alertPromo);
 
 promoText.oninput = () => {
     alertPromo.innerText = "";
