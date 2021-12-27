@@ -15,6 +15,7 @@ function addProduct ({name, imgUrl, id, faceId, price, storage}) {
     a.classList = "card";
     let columns;
     for (let i = 0; i < columnsRadio.length; i++) {
+        // card[i].classList.toggle("col-4");
         if (columnsRadio[i].checked === true) {
             columns = columnsRadio[i].value;
         }
@@ -203,6 +204,7 @@ document.body.addEventListener ("change", (e) => {
     switch (target.id) {
         case "radioThree":
             for (let i = 0; i < card.length; i++){
+                // card[i].classList.toggle("col-4");
                 card[i].classList.add("col-4");
                 card[i].classList.remove("col-2");
             }

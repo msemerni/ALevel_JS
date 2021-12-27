@@ -1,4 +1,5 @@
-﻿import { users } from "./users.js";
+﻿// import users from "./users.js";
+import { users } from "./users.js";
 console.log(users);
 
 // const user = users[0];
@@ -12,13 +13,14 @@ const createCard = (data) => {
         <h1>Name: ${data.name}</h1>
         <a href ="mailto: ${data.email}">Email: ${data.email}</h2>
         <a href="${data.website}">Website</a>
+        <button class="show-info">Show info</button>
         <div class="info">
             <h3>Address: ${city} ${suite}</h3>
         </div>
-        <button class="show-info">Show info</button>
         <hr>
     </div>
     `
+
     const button = card.querySelector(".show-info");
     const infoElement = card.querySelector(".info");
     button.onclick = () => {
