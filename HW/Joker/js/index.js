@@ -6,7 +6,7 @@ container.appendChild(alertPromo);
 
 promoText.oninput = () => {
     alertPromo.innerText = "";
-} 
+}
 
 //МОЖЕТ ЛИ ПРОМОКОД НАЧИНАТЬСЯ С НУЛЯ? ДОПУСТИМ, ЧТО МОЖЕТ. НО ТАК СЛОЖНЕЕ ))
 //ЕСЛИ НЕ МОЖЕТ НАЧИНАТЬСЯ С НУЛЯ:
@@ -36,6 +36,7 @@ promoButton.onclick = () => {
     const returnedValue = getBonus(promoTextNumber);
     counterKeyDown = 0;
     alertPromo.innerText = "";
+
     if (returnedValue === 0) {
         alertPromo.innerText = `Промокод ${promoText.value} не действительный`;
         console.log(`Промокод ${promoText.value} не действительный`);
@@ -54,10 +55,10 @@ function checkNumber(key) {
 }
 
 function getBonus(someNumber) {
-// if ( (someNumber/10000000) >= 1 && (someNumber/10000000) < 10){
-//     someNumber = true;
-//      ...
-// }
+    // if ( (someNumber/10000000) >= 1 && (someNumber/10000000) < 10){
+    //     someNumber = true;
+    //      ...
+    // }
 
     let promoNumber = someNumber;
     let allDigits = [];
@@ -146,4 +147,3 @@ function getBonus(someNumber) {
     };
 
 };
-
