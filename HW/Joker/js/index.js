@@ -1,28 +1,64 @@
 const container = document.getElementById("container");
 const promoButton = document.getElementById("promoButton");
 const alertPromo = document.createElement("resultBox");
+alertPromo.style.textAlign = "center";
 container.appendChild(alertPromo);
 
 promoText.oninput = () => {
     alertPromo.innerText = "";
-}
+} 
+
+//МОЖЕТ ЛИ ПРОМОКОД НАЧИНАТЬСЯ С НУЛЯ? ДОПУСТИМ, ЧТО МОЖЕТ. НО ТАК СЛОЖНЕЕ ))
+//ЕСЛИ НЕ МОЖЕТ НАЧИНАТЬСЯ С НУЛЯ:
+// if ( (promoTextNumber/10000000) >= 1 && (promoTextNumber/10000000) < 10){
+//     promoTextNumber = true;
+// }
+
+let counterKeyDown = 0;
+promoText.addEventListener("keydown", (e) => {
+    // counterKeyDown = promoText.value.length;
+    // if (promoText.value == "") {
+    //     counterKeyDown = 0;
+    // }
+    if (e.key >= "0" && e.key <= "9") {
+        counterKeyDown++;
+        console.log(counterKeyDown);
+    }
+    // else if (e.key == "Delete" || e.key == "Backspace") {
+    //     counterKeyDown--;
+    //     console.log(counterKeyDown);
+    // }
+})
 
 promoButton.onclick = () => {
     const promoText = document.getElementById("promoText");
     const promoTextNumber = +promoText.value;
     const returnedValue = getBonus(promoTextNumber);
+    counterKeyDown = 0;
     alertPromo.innerText = "";
     if (returnedValue === 0) {
-        alertPromo.innerText = "Промокод не действительный";
-        console.log("Промокод не действительный");
+        alertPromo.innerText = `Промокод ${promoText.value} не действительный`;
+        console.log(`Промокод ${promoText.value} не действительный`);
+        promoText.value = "";
     }
     else {
-        alertPromo.innerText += `Бонус: ${returnedValue} грн.`;
+        alertPromo.innerText += `Промокод: ${promoText.value}\n Бонус: ${returnedValue} грн.`;
         console.log(`Бонус: ${returnedValue} грн.`);
+        promoText.value = "";
     }
 };
 
+function checkNumber(key) {
+    return (key >= "0" && key <= "9");
+    // return (key >= "0" && key <= "9") || key == "ArrowLeft" || key == "ArrowRight" || key == "Delete" || key == "Backspace";
+}
+
 function getBonus(someNumber) {
+// if ( (someNumber/10000000) >= 1 && (someNumber/10000000) < 10){
+//     someNumber = true;
+//      ...
+// }
+
     let promoNumber = someNumber;
     let allDigits = [];
     let evenSum = 0;
@@ -33,9 +69,9 @@ function getBonus(someNumber) {
         allDigits[i] = Math.floor(promoNumber % 10);
         promoNumber /= 10;
     }
-    // console.log(allDigits);
+    console.log(allDigits);
     //если число целое и восьмизначное
-    if (((someNumber ^ 0) === someNumber) && (Math.floor(promoNumber) === 0)) {
+    if (((someNumber ^ 0) === someNumber) && (counterKeyDown === 8)) {
         ////////////////////создание массива всех нечетных двузначных + однозначных (чет и нечет) чисел///////////
         let oddPairsAndOthers = [];
         for (let i = 0; i < allDigits.length - 1; i++) {
