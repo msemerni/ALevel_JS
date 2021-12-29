@@ -12,6 +12,7 @@ promoText.oninput = () => {
 //ЕСЛИ НЕ МОЖЕТ НАЧИНАТЬСЯ С НУЛЯ:
 // if ( (promoTextNumber/10000000) >= 1 && (promoTextNumber/10000000) < 10){
 //     promoTextNumber = true;
+//      ....
 // }
 
 let counterKeyDown = 0;
@@ -40,13 +41,13 @@ promoButton.onclick = () => {
     if (returnedValue === 0) {
         alertPromo.innerText = `Промокод ${promoText.value} не действительный`;
         console.log(`Промокод ${promoText.value} не действительный`);
-        promoText.value = "";
     }
     else {
         alertPromo.innerText += `Промокод: ${promoText.value}\n Бонус: ${returnedValue} грн.`;
         console.log(`Бонус: ${returnedValue} грн.`);
-        promoText.value = "";
     }
+    promoText.value = "";
+
 };
 
 function checkNumber(key) {
@@ -54,6 +55,7 @@ function checkNumber(key) {
     // return (key >= "0" && key <= "9") || key == "ArrowLeft" || key == "ArrowRight" || key == "Delete" || key == "Backspace";
 }
 
+//// Функция расчета бонуса, которая принимает тип "number":
 function getBonus(someNumber) {
     // if ( (someNumber/10000000) >= 1 && (someNumber/10000000) < 10){
     //     someNumber = true;
@@ -145,5 +147,4 @@ function getBonus(someNumber) {
     else {
         return 0;
     };
-
 };
