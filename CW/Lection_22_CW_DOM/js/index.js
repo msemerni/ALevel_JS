@@ -5,75 +5,85 @@
 //     document.body.appendChild(div);
 // }
 
-// fetch ("https://jsonplaceholder.typicode.com/todos/1")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
+// // fetch ("https://jsonplaceholder.typicode.com/todos/1")
+// //     .then(response => response.json())
+// //     .then(data => createEl(data))
 
-// fetch ("https://jsonplaceholder.typicode.com/todos/2")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
-
-// let i = 1;
-// while (i === 100) {
-// fetch ("https://jsonplaceholder.typicode.com/todos/${i}")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
-//     i++;
-//     // console.log(i);
-// }
-
-///////////////////////////////////////////////////////////////
+// // fetch ("https://jsonplaceholder.typicode.com/todos/2")
+// //     .then(response => response.json())
+// //     .then(data => createEl(data))
 
 
-// function getData () {
-    // let i = 1;
-    fetch (`https://jsonplaceholder.typicode.com/posts`)
-        .then(response => response.json())
-        // .then(data => createEl(data))
-        .then(data => data.map(item => createEl(item)))
-        // .finally(() => getData(i + 1))
-// }
+// ///////////////////
+// //////////////////////////по порядку/////////////////////////////////////
 
-// getData(10)
-//////
-// // function getData () {
-// //     let i = 1;
+// // function getData (i) {
+// //     if(i < 100) {
+// //     fetch (`https://jsonplaceholder.typicode.com/posts/${i}`)
+// //         .then(response => response.json())
+// //         .then(data => createEl(data))
+// //         .finally(() => getData(i + 1))
+// //     }
+// // }
+// // getData(1);
+
+// ////////////////////////////не по порядку////////////////////////
+
+// // let i = 1;
+// // while (i <= 100) {
 // //     fetch (`https://jsonplaceholder.typicode.com/todos/${i}`)
 // //         .then(response => response.json())
-// //         // .then(data => createEl(data))
-// //         .then(data => data.map(item => createEl(item)))
-// //         // .finally(() => getData(i + 1))
+// //         .then(data => createEl(data));
+// //         i++;
 // // }
 
-// // getData(10)
 
-// let i = 1;
-// while (i <= 100) {
-//     fetch (`https://jsonplaceholder.typicode.com/todos/${i}`)
-//         .then(response => response.json())
-//         .then(data => createEl(data));
-//         i++;
+////////////////////////////////////вывод постов///////////////////////////////////////////////////
+// fetch (`https://jsonplaceholder.typicode.com/posts`)
+// .then(response => response.json())
+// .then(data => data.map(item => createEl(item)))
+
+
+// function createEl ({userId, id, title, body}) {
+//     let div = document.createElement("div");
+//     div.classList = "col-3 card"
+//     div.innerHTML = `<h3 style="text-align: center">${userId}-${id}</h3>
+//     <h5>${title}</h5>
+//     <p>${body}</p>`
+
+//     let btnComments = document.createElement("button");
+//     btnComments.innerText = "Comments";
+//     btnComments.classList = "btn btn-secondary mt-auto";
+
+//     document.getElementById("container").appendChild(div).appendChild(btnComments);
 // }
 
-
-
-///////////////////////////// ДЗ //////////////////////////////////
-
-
-function createEl ({userId, id, title, body}) {
+////////////////////////////////////вывод постов и комментов///////////////////////////////////////////////////
+function createComment (container, {body}){
     let div = document.createElement("div");
-    div.classList = "col-3 card flex-column"
-    div.innerHTML = `<h3 style="text-align: center">${userId}-${id}</h3>
-    <h5>${title}</h5>
-    <p>${body}</p>`
+    div.innerHTML = `<p>${body}</p>`;
+    container.appendChild(div);
+}
 
+function createEl ({title, body, id}) {
+    let div = document.createElement("div");
+    div.classList = "col-3 card";
+    div.innerHTML = `
+    <h3 style="text-align: center">${title}</h3>
+    <p>${body}</p>`
     let btnComments = document.createElement("button");
     btnComments.innerText = "Comments";
     btnComments.classList = "btn btn-secondary mt-auto";
-
-    document.getElementById("container").appendChild(div).appendChild(btnComments);
-
+    btnComments.onclick = () => {
+        fetch (`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+            .then(response => response.json())
+            .then(data => data.map(item => createComment(div, item)))
+    }
+    div.appendChild(btnComments);
+    document.getElementById("container").appendChild(div);
 }
 
-
+fetch (`https://jsonplaceholder.typicode.com/posts`)
+    .then(response => response.json())
+    .then(data => data.map(createEl))
 

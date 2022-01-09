@@ -1,79 +1,104 @@
-﻿
-// function createEl ({userId, id, title, completed}) {
-//     let div = document.createElement("div");
-//     div.innerHTML = `<p>${userId} ${id} ${title}</p>`
-//     document.body.appendChild(div);
-// }
+﻿class Post {
+    constructor({id, title, body}, containerId){
+        this.id = id;
+        this.title = title;
+        this.body = body;
 
-// fetch ("https://jsonplaceholder.typicode.com/todos/1")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
+        this.postContainer = document.createElement("div");
+        this.postContainer.classList = "col-4 card";
+        this.postContainer.innerHTML = `
+        <h4>${title}</h4>
+        <p>${body}</p>
+        <div class="info"></div>`;
 
-// fetch ("https://jsonplaceholder.typicode.com/todos/2")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
+        this.btnComments = document.createElement("button");
+        this.btnComments.classList = "btn btn-secondary mt-auto";
+        this.btnComments.innerText = "Show comments";
+        // this.btnComments.addEventListener("click", () => this.showComments(id));
+        this.postContainer.appendChild(this.btnComments);
+        document.getElementById(containerId).append(this.postContainer);
+        // this.btnComments.removeEventListener("click", () => this.showComments(id));
 
-// let i = 1;
-// while (i === 100) {
-// fetch ("https://jsonplaceholder.typicode.com/todos/${i}")
-//     .then(response => response.json())
-//     .then(data => createEl(data))
-//     i++;
-//     // console.log(i);
-// }
+        const commentsDiv = this.postContainer.querySelector(".info");
+        this.btnComments.onclick = () => {
+            const isShow = commentsDiv.classList.toggle("show");
+            if(isShow) {
+                this.btnComments.innerText = "Hide comments";
+                let xxx = commentsDiv.innerHTML = this.showComments(id);//////////// тут UNDERFINED
+                console.log(xxx);//////////// тут UNDERFINED
+                console.log("показал комменты");
+            }
+            else {
+                this.btnComments.innerText = "Show comments"
+                console.log("скрыл комменты");
 
-///////////////////////////////////////////////////////////////
+            }
+        }
+    }
 
-//////////// НЕ РАБОТАЕТ
-// function getData () {
-    // let i = 1;
-    fetch (`https://jsonplaceholder.typicode.com/posts`)
-        .then(response => response.json())
-        // .then(data => createEl(data))
-        .then(data => data.map(item => createEl(item)))
-        // .finally(() => getData(i + 1))
-// }
+    createComment(container, {body}){
+        const commentsDiv = this.postContainer.querySelector(".info");
 
-// getData(10)
-//////
-// // function getData () {
-// //     let i = 1;
-// //     fetch (`https://jsonplaceholder.typicode.com/todos/${i}`)
-// //         .then(response => response.json())
-// //         // .then(data => createEl(data))
-// //         .then(data => data.map(item => createEl(item)))
-// //         // .finally(() => getData(i + 1))
-// // }
+        let div = document.createElement("div");
+        div.innerHTML = `<p>${body}</p>`;
+        // container.appendChild(div);  /// НЕ РАБОТАЕТ
+        commentsDiv.appendChild(div);
+    }
 
-// // getData(10)
-
-// let i = 1;
-// while (i <= 100) {
-//     fetch (`https://jsonplaceholder.typicode.com/todos/${i}`)
-//         .then(response => response.json())
-//         .then(data => createEl(data));
-//         i++;
-// }
-
-
-
-///////////////////////////// ДЗ //////////////////////////////////
-
-
-function createEl ({userId, id, title, body}) {
-    let div = document.createElement("div");
-    div.classList = "col-3 card flex-column"
-    div.innerHTML = `<h3 style="text-align: center">${userId}-${id}</h3>
-    <h5>${title}</h5>
-    <p>${body}</p>`
-
-    let btnComments = document.createElement("button");
-    btnComments.innerText = "Comments";
-    btnComments.classList = "btn btn-secondary mt-auto";
-
-    document.getElementById("container").appendChild(div).appendChild(btnComments);
+    showComments(id){
+        fetch (`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+            .then(response => response.json())
+            .then(data => data.map(comment => this.createComment(this.commentsDiv, comment)))
+    }
 
 }
 
 
+class Start {
+    constructor(){
+        fetch (`https://jsonplaceholder.typicode.com/posts`)
+        .then(response => response.json())
+        .then(data => data.map(data => new Post(data, "container")))
+    };  
+}
+
+let myApp = new Start();
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////вывод постов и комментов///////////////////////////////////////////////////
+// function createComment (container, {body}){
+//     let div = document.createElement("div");
+//     div.innerHTML = `<p>${body}</p>`;
+//     container.appendChild(div);
+// }
+
+// function createEl ({title, body, id}) {
+//     let div = document.createElement("div");
+//     div.classList = "col-3 card";
+//     div.innerHTML = `
+//     <h3 style="text-align: center">${title}</h3>
+//     <p>${body}</p>`
+//     let btnComments = document.createElement("button");
+//     btnComments.innerText = "Comments";
+//     btnComments.classList = "btn btn-secondary mt-auto";
+//     btnComments.onclick = () => {
+//         fetch (`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+//             .then(response => response.json())
+//             .then(data => data.map(item => createComment(div, item)))
+//     }
+//     div.appendChild(btnComments);
+//     document.getElementById("container").appendChild(div);
+// }
+
+// fetch (`https://jsonplaceholder.typicode.com/posts`)
+//     .then(response => response.json())
+//     .then(data => data.map(createEl))
 
