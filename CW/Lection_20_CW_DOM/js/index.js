@@ -1,208 +1,127 @@
-﻿// // const button = document.querySelector("button");
-// // console.dir(button);
+﻿// const button = document.querySelector("button");
+// console.dir(button);
 
-// // button.onclick = function (e) {
-// //     // console.log(e);
-// //     // console.log(this);
+// button.onclick = function (e) {
+//     // console.log(e);
+//     // console.log(this);
+//     //////////////
+//     // console.log("click");
 
-// //     // if (e.ctrlKey) {
-// //     //     console.log("Ctrl");
-// //     // }
-// //     // if (e.altKey) {
-// //     //     console.log("Alt");
-// //     // }
-// //     // if (e.shifrKey) {
-// //     //     console.log("Shift");
-// //     // }
-// //     // console.log("------------");
+//     // if (e.ctrlKey) {
+//     //     console.log("Ctrl");
+//     // }
+//     // if (e.altKey) {
+//     //     console.log("Alt");
+//     // }
+//     // if (e.shiftKey) {
+//     //     console.log("Shift");
+//     // }
+//     // console.log("------------");
+//     ///////////////
+//     console.log(e.target);
+// }
 
-// //     ///////////////////////////////////////////////////
+// // //     ///////////////////////////////////////////////////
+// const input = document.querySelector("input");
+// const h1 = document.querySelector("h1");
 
-// //     console.log(e.target);
+// input.oninput = (e) => {
+//     const text = e.target.value;
+//     h1.innerText = text;
+// }
+// // //     ///////////////////////////////////////////////////
 
-// //     ///////////////////////////////////////////////////
-
-// //     const input = document.querySelector("input");
-// //     const h1 = document.querySelector("h1");
-
-// //     input.oninput = (e) => {
-// //         const text = e.target.value;
-// //         h1.innerText = text;
-// //     }
-
-// // document.querySelector("form").onsubmit = (e) => {
-// //     e.preventDefault(); // отменяет стандартное поведение отправки формы (теперь не перезагружает страницу)
-// //     // const name = e.target.elements;
-
-// //     const {name, lastname} = e.target.elements;
-// //     console.log(name.value);
-
-// // }
-
-// //     ///////////////////////////////////////////////////
-
-// //     document.querySelector("form").addEventListener("submit", (e) => {
-// //         e.preventDefault(); // отменяет стандартное поведение отправки формы (теперь не перезагружает страницу)
-// //         // const name = e.target.elements;
-    
-// //         const {name, lastname} = e.target.elements;
-// //         console.log(name.value);
-    
-// //     }
-
-    
-
-
-// // }
-// // const formsubmit = (e) => {
-
-// //         console.log("555");
-    
-// //     }
-// //     document.querySelector("form").addEventListener("submit", formsubmit )....
-
-
-// //     ///////////////////////////////////////////////////
-
-// const div = document.querySelector("div");
-// const button = document.querySelector("button");
-// const checkBox = document.querySelector("checkbox");
-
-// const elemList = [document, document.body, div, button];
-
-// elemList.forEach(element => {
-//     element.addEventListener(
-//         "click",
-//         (e) => console.log(element.tagName),
-//         true ////false - по умолчанию
-//     )
-// })
-
-// document.body.addEventListener(
-//     "click",
-//     (e) => console.log("Phase1")
-//     // console.log(e.target)
-//     ,
-//     true
-// )
-
-
-// let isListenEvents = false;
-
-// checkBox.onchange = (e) => {
-//     isListenEvents = !isListenEvents;
-//     if (isListenEvents) {
-
-//     }
-
+ 
+// document.querySelector("form").onsubmit = (e) => {
 //     e.preventDefault(); // отменяет стандартное поведение отправки формы (теперь не перезагружает страницу)
-//     e.stopPropagation(); // отменяет всплытие
-//     e.stopImmediatePropagation(); // отменяет всплытие и отключает все последующие listenerы
+//     const name1 = e.target.elements;
+//     console.log(name1);
+//     console.log(name1.value);
+
+//     const {name, lastname} = e.target.elements;
+//     console.log(name.value);
+//     console.log(lastname.value);
 
 // }
 
-// elemList.forEach(element => {
-//     element.addEventListener(
-//         "click", (e) => {
-//             if (element.tagName === "DIV" && e.stopPropagation()){
-//             console.log(element.tagName)
-//             }
-        
-//         }
-//     )
-// })
-// //////////////////////////////////////////
-// const isAnaliticEnabled = false;
+// // //     ///////////////////// EventListener //////////////////////////////
 
-// elemList.forEach(element => {
-//     element.addEventListener(
-//         "click", (e) => {
-//             element.tagName === "DIV" && isAnaliticEnabled;
-//             console.log(element.tagName);
-//             e.stopImmediatePropagation()
-        
-//         }
-//     )
-// })
+//     const formsubmit = (e) => {
+//         e.preventDefault(); // отменяет стандартное поведение отправки формы (теперь не перезагружает страницу)
+//         // const name = e.target.elements;
+//         console.log("submit1");
+    
+//         const {name, lastname} = e.target.elements;
+//         console.log(name.value);
+    
+//     }
 
+//     document.querySelector("form").addEventListener("submit", formsubmit); // добавил
+//     document.querySelector("form").removeEventListener("submit", formsubmit); // и удалил сразу же
+    
 
-// //////////////////////////////////////////
+// //     //////////////// 2.Всплытие и погружение ///////////////////////////////////
 
-class Item {
-    constructor (name, price) {
-        this.id = Item.id++;
-        this.name = name;
-        this.price = price;
-        this.color = this.getRandomColor();
-    }
-    static id = 1;
+const div = document.querySelector("div");
+const button = document.querySelector("button");
+// const checkBox = document.querySelector("checkbox");
+const checkBox = document.querySelector("input[type='checkbox']");
 
-    getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * letters.length)];
-    }
-    return color;
-    }
+const elemList = [document, document.body, div, button];
 
-    // getRandomColor() { не доделано
-    //     var result = '#';
-    //     var alphabet = 'abcdef';
-    //     for (var i = 0; i < 6; i++) {
-    //       color += letters[Math.floor(Math.random() * 16)];
-    //     }
-    //     return color;
-    //     }
+elemList.forEach(element => {element.onclick = () => console.log(element.tagName)})
 
-
-}
-
-
-const itemNames = ["Vaz", "BMW", "Audi", "Mercedes"]
-
-const cars = itemNames.map(name => {
-    const price = Math.ceil(Math.random()*100000)
-    return new Item(name, price);
+elemList.forEach(element => {
+    element.addEventListener("click", (e) => {
+        // e.stopPropagation()
+        element.tagName === "DIV" && e.stopPropagation()
+        // console.log(element.tagName)
+    },false) ////true - на погружении, false - по умолчанию
 })
+ 
+document.body.addEventListener("click", (e) => console.log("Phase1", e.target),true) 
 
-console.log(cars)
+// checkBox.onchange = (e) => console.log(e);
+let isListenEvents = false;
 
-class Cart {
-    constructor(){
-        this.items = [];
-        this.totalPrice = 0;
-        this.totalAmount = 0;
+const analyticCallback = (e) => console.log("Analytic:", e.target);
+
+checkBox.onchange = (e) => {
+    isListenEvents = !isListenEvents;
+    console.log(isListenEvents);
+    if (isListenEvents){
+        document.body.addEventListener("click", analyticCallback, true)
+    } else {
+        document.body.removeEventListener("click", analyticCallback)
     }
 
-    #calculateTotals (){
-        const result = this.items.reduce((acc,item) => {
-            return{
-                totalPrice: acc.totalPrice + (item.carData.price * item.ammount);
-                totalAmount: acc.totalAmount + item.ammount;
-            } 
-
-        },
-        {
-            totalAmount: 0,
-            totalPrice: 0
-        })
-        Object.assign(this,result);
     }
 
-    addItem(car){
-        const carInCart = this.items.find(item => car.id === item.id);
-    if(carInCart) {
-        carInCart.ammount++;
-    }
-    else{
-        this.items.push({
-            id: car.id,
-            ammount: 1
-        })
-    }
-}
+////     e.preventDefault(); // отменяет стандартное поведение отправки формы (теперь не перезагружает страницу)
+////     e.stopPropagation(); // отменяет всплытие
+////     e.stopImmediatePropagation(); // отменяет всплытие и отключает все последующие listenerы для элемента
 
 
+// //////////////////////////////////////////
+// const isAnalyticEnabled = true;
 
+// elemList.forEach(element => {
+//     element.addEventListener(
+//         "click", (e) => {
+//             if (element.tagName === "DIV" && isAnalyticEnabled) {
+//             // e.stopPropagation()
+//             e.stopImmediatePropagation()
+
+//         }
+//         console.log(element.tagName);
+//     }
+//     )
+//     element.addEventListener (
+//         "click", (e) => {
+
+//         console.log("analytic enabled")
+//         }
+
+//     )
+// })
 

@@ -1,0 +1,14 @@
+body {
+    padding: 30px;
+    background: rgb(41, 99, 99);
+}
+
+div {
+    padding: 30px;
+    background: blue;
+}
+
+button {
+    padding: 30px;
+    background: green;
+}

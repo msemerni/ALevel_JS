@@ -1272,4 +1272,6 @@ export const items = [
     },
 ];
 
+console.log(items);
+
 

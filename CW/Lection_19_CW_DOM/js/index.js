@@ -44,3 +44,42 @@ const renderCards = (list) => {
 
 renderCards(users);
 
+//////////////////////////////////////////////
+function User(asdf) {
+    this.name = "Vasya"
+}
+
+console.log(User.prototype);
+
+User.prototype.name = "Kolya";
+
+const func = User();
+const instance = new User();
+console.log (instance.name); // Vasya
+
+console.log (func);
+console.log (instance);
+
+instance.__proto__ === User.prototype; // true
+
+///////
+
+class Human {
+    getFullName() {
+        return "Human";
+    }
+    getSome() {
+        return "Human Some"
+    }
+}
+
+class User2 extends Human {
+    getFullName() {
+        this.name = "Misha"
+        return "User";
+    }
+}
+
+const inst = new User2();
+
+console.log(inst.__proto__);
