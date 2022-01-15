@@ -19,13 +19,15 @@
         document.getElementById(containerId).append(this.postContainer);
         // this.btnComments.removeEventListener("click", () => this.showComments(id));
 
+        const shComm = this.showComments(id);
+
         const commentsDiv = this.postContainer.querySelector(".info");
         this.btnComments.onclick = () => {
             const isShow = commentsDiv.classList.toggle("show");
             if(isShow) {
                 this.btnComments.innerText = "Hide comments";
-                let xxx = commentsDiv.innerHTML = this.showComments(id);//////////// тут UNDERFINED
-                console.log(xxx);//////////// тут UNDERFINED
+                let xxx = commentsDiv.innerHTML = shComm();
+                console.log(xxx);
                 console.log("показал комменты");
             }
             else {
@@ -38,7 +40,6 @@
 
     createComment(container, {body}){
         const commentsDiv = this.postContainer.querySelector(".info");
-
         let div = document.createElement("div");
         div.innerHTML = `<p>${body}</p>`;
         // container.appendChild(div);  /// НЕ РАБОТАЕТ
@@ -50,9 +51,7 @@
             .then(response => response.json())
             .then(data => data.map(comment => this.createComment(this.commentsDiv, comment)))
     }
-
 }
-
 
 class Start {
     constructor(){
