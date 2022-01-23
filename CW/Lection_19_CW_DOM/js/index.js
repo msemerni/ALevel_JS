@@ -11,7 +11,7 @@ const createCard = (data) => {
     card.innerHTML = `
     <div>
         <h1>Name: ${data.name}</h1>
-        <a href ="mailto: ${data.email}">Email: ${data.email}</h2>
+        <a href ="mailto: ${data.email}">Email: ${data.email}
         <a href="${data.website}">Website</a>
         <button class="show-info">Show info</button>
         <div class="info">

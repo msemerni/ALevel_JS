@@ -1,11 +1,11 @@
 ﻿class Post {
-    constructor({id, title, body}, containerId){
+    constructor({ id, title, body }, containerId) {
         this.id = id;
         this.title = title;
         this.body = body;
 
         this.postContainer = document.createElement("div");
-        this.postContainer.classList = "col-4 card";
+        this.postContainer.classList = "col-3 card";
         this.postContainer.innerHTML = `
         <h4>${title}</h4>
         <p>${body}</p>
@@ -14,51 +14,44 @@
         this.btnComments = document.createElement("button");
         this.btnComments.classList = "btn btn-secondary mt-auto";
         this.btnComments.innerText = "Show comments";
-        // this.btnComments.addEventListener("click", () => this.showComments(id));
-        this.postContainer.appendChild(this.btnComments);
+        this.postContainer.append(this.btnComments);
         document.getElementById(containerId).append(this.postContainer);
-        // this.btnComments.removeEventListener("click", () => this.showComments(id));
 
         const shComm = this.showComments(id);
-
         const commentsDiv = this.postContainer.querySelector(".info");
-        this.btnComments.onclick = () => {
+        this.btnComments.addEventListener("click", () => {
             const isShow = commentsDiv.classList.toggle("show");
-            if(isShow) {
+            if (isShow) {
                 this.btnComments.innerText = "Hide comments";
-                let xxx = commentsDiv.innerHTML = shComm();
-                console.log(xxx);
-                console.log("показал комменты");
+                commentsDiv.innerHTML = shComm();
             }
             else {
                 this.btnComments.innerText = "Show comments"
-                console.log("скрыл комменты");
-
             }
-        }
+        })
     }
 
-    createComment(container, {body}){
+    createComment(container, { body }) {
         const commentsDiv = this.postContainer.querySelector(".info");
         let div = document.createElement("div");
         div.innerHTML = `<p>${body}</p>`;
         // container.appendChild(div);  /// НЕ РАБОТАЕТ
-        commentsDiv.appendChild(div);
+        commentsDiv.append(div);
     }
 
-    showComments(id){
-        fetch (`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+    showComments(id) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
             .then(response => response.json())
             .then(data => data.map(comment => this.createComment(this.commentsDiv, comment)))
     }
 }
 
 class Start {
-    constructor(){
-        fetch (`https://jsonplaceholder.typicode.com/posts`)
-        .then(response => response.json())
-        .then(data => data.map(data => new Post(data, "container")))
-    };  
+    constructor() {
+        fetch(`https://jsonplaceholder.typicode.com/posts`)
+            .then(response => response.json())
+            .then(data => data.map(data => new Post(data, "container")))
+    };
 }
 
 let myApp = new Start();

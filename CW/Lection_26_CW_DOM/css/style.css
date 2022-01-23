@@ -1,0 +1,58 @@
+
+  body {
+    font-family: sans-serif;
+  }
+  
+  #container {
+    width: 400px;
+    margin: 0 auto;
+  }
+  h2 {
+    text-align: center;
+    color: brown;
+  }
+  /* .mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid grey;
+    width: 590px;
+    padding-left: 10px;
+  } */
+
+  .maininput {
+      width: 100%;
+      border: solid 2px;
+  }
+  .taskbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: solid 1px;
+    border-top: 0;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  button, svg {
+      margin: 5px;
+      /* padding: 0; */
+  }
+
+  .taskbox input {
+    margin: 5px;
+  }
+
+  svg {
+      visibility: hidden;
+  }
+
+  .taskbox:hover svg {
+    visibility: visible;
+  }
