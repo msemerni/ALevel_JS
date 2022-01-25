@@ -6,7 +6,7 @@ class ToDo {
         this.mainContainer = document.createElement('div');
         document.getElementById(container).append(this.mainContainer);
 
-        this.title = document.createElement('h2');
+        this.title = document.createElement('h1');
         this.title.innerText = "todos";
         this.mainContainer.append(this.title);
 
@@ -15,7 +15,7 @@ class ToDo {
         this.mainContainer.append(this.inputContainer);
 
         this.checkBoxChooseAll = document.createElement("span");
-        this.checkBoxChooseAll.innerHTML = `vv`;
+        this.checkBoxChooseAll.innerHTML = `+`;
         this.checkBoxChooseAll.className = "checkboxchooseall";
         this.inputContainer.append(this.checkBoxChooseAll);
 
@@ -39,17 +39,17 @@ class ToDo {
 
         this.btnAllTasks = document.createElement("button");
         this.btnAllTasks.innerText = "All Tasks";
-        this.btnAllTasks.classList = "btn btn-outline-success btn-sm";
+        this.btnAllTasks.classList = "btn btn-outline-primary btn-sm";
         this.footer.append(this.btnAllTasks);
 
         this.btnActiveTasks = document.createElement("button");
         this.btnActiveTasks.innerText = "Active";
-        this.btnActiveTasks.classList = "btn btn-outline-secondary btn-sm";
+        this.btnActiveTasks.classList = "btn btn-outline-danger btn-sm";
         this.footer.append(this.btnActiveTasks);
 
         this.btnCompletedTasks = document.createElement("button");
         this.btnCompletedTasks.innerText = "Completed";
-        this.btnCompletedTasks.classList = "btn btn-outline-primary btn-sm";
+        this.btnCompletedTasks.classList = "btn btn-outline-success btn-sm";
         this.footer.append(this.btnCompletedTasks);
 
         this.arr.map((task) => new Task({ checkbox: task.checkbox, text: task.text }));
@@ -60,9 +60,9 @@ class ToDo {
           listOfTasks.forEach((task) => {
               task.checked = "checked"
             });
+          this.checkBoxChooseAll.innerHTML = `-`;
           console.log("checked All"); ////
           console.log(listOfTasks); ////
-            
         })
 
         this.input.addEventListener('change', () => {
@@ -74,7 +74,8 @@ class ToDo {
             this.totalTaskCount.innerText = `Total: ${this.arr.length}`
             this.input.value = ""
             console.log(this.arr); ////
-        });
+        })
+      ;
 
         this.btnAllTasks.addEventListener( "click", () => {this.showAllTasks()});
         this.btnActiveTasks.addEventListener( "click", () => {this.showActiveTasks()});
@@ -97,7 +98,6 @@ class ToDo {
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active hide"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
-
     }
 
 }
@@ -117,6 +117,7 @@ class Task {
         this.checkBox.type = "checkbox";
 
         this.taskText = document.createElement('span');
+        this.taskText.className = "tasktext"
         this.taskText.innerHTML = this.todo.text;
 
         this.btnDeleteTask = document.createElement("span");
