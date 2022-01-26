@@ -1,7 +1,6 @@
 class ToDo {
     constructor(container) {
         this.arr = [];
-        this.arr = JSON.parse(localStorage.getItem("key"));
 
         this.mainContainer = document.createElement('div');
         document.getElementById(container).append(this.mainContainer);
@@ -14,10 +13,18 @@ class ToDo {
         this.inputContainer.className = "inputcontainer";
         this.mainContainer.append(this.inputContainer);
 
-        this.checkBoxChooseAll = document.createElement("span");
+        this.checkBoxChooseAll = document.createElement("label");
         this.checkBoxChooseAll.innerHTML = `+`;
+        this.checkBoxChooseAll.id = `checkboxchooseall`;
         this.checkBoxChooseAll.className = "checkboxchooseall";
+        this.checkBoxChooseAll.htmlFor = "checkboxbhooseallinvisible"
         this.inputContainer.append(this.checkBoxChooseAll);
+
+        this.checkBoxChooseAllInvisible = document.createElement("input");
+        this.checkBoxChooseAllInvisible.type = "checkbox";
+        this.checkBoxChooseAllInvisible.id = "checkboxbhooseallinvisible";
+        this.checkBoxChooseAllInvisible.checked = false;
+        this.inputContainer.append(this.checkBoxChooseAllInvisible);
 
         this.input = document.createElement('input');
         this.input.placeholder = "Enter your task here";
@@ -33,8 +40,8 @@ class ToDo {
         this.mainContainer.append(this.footer);
 
         this.totalTaskCount = document.createElement("span");
-        this.totalTaskCount.id = "totaltaskcount"
-        this.totalTaskCount.innerText = `Total: ${this.arr.length}`;
+        this.totalTaskCount.id = "totaltaskcount";
+        this.totalTaskCount.innerText = `Total: 0`;
         this.footer.append(this.totalTaskCount);
 
         this.btnAllTasks = document.createElement("button");
@@ -52,34 +59,48 @@ class ToDo {
         this.btnCompletedTasks.classList = "btn btn-outline-success btn-sm";
         this.footer.append(this.btnCompletedTasks);
 
-        this.arr.map((task) => new Task({ checkbox: task.checkbox, text: task.text }));
-        console.log(this.arr); ////
+        if (localStorage.getItem("key") !== null) {
+            this.arr = JSON.parse(localStorage.getItem("key"));
+            this.arr.map((task) => new Task({ checkbox: task.checkbox, text: task.text }));
+            this.totalTaskCount.innerText = `Total: ${this.arr.length}`;
+        }
 
-        this.checkBoxChooseAll.addEventListener('click', () => { 
-          let listOfTasks = document.querySelectorAll(".taskcheckbox");
-          listOfTasks.forEach((task) => {
-              task.checked = "checked"
-            });
-          this.checkBoxChooseAll.innerHTML = `-`;
-          console.log("checked All"); ////
-          console.log(listOfTasks); ////
+        this.checkBoxChooseAllInvisible.addEventListener('change', () => {
+            let listOfTasks = document.querySelectorAll(".taskcheckbox");
+
+            if (this.checkBoxChooseAllInvisible.checked === true && this.arr.length > 0) {
+                listOfTasks.forEach((task) => {
+                    if (task.checked === false) {
+                        task.click();
+                        this.checkBoxChooseAll.innerHTML = `-`;
+                    }
+                });
+            } else {
+                listOfTasks.forEach((task) => { task.click() });
+                this.checkBoxChooseAllInvisible.checked = false;
+                this.checkBoxChooseAll.innerHTML = `+`;
+            }
         })
 
         this.input.addEventListener('change', () => {
-            this.arr = JSON.parse(localStorage.getItem("key"));
+
+            if (localStorage.getItem("key") !== null) {
+                this.arr = JSON.parse(localStorage.getItem("key"));
+            } else {
+                this.arr = [];
+            }
+
             if (this.input.value.trim() !== "") {
                 this.arr.push(new Task({ checkbox: false, text: this.input.value }).todo)
             }
-            localStorage.setItem("key", JSON.stringify(this.arr))
+            localStorage.setItem("key", JSON.stringify(this.arr));
             this.totalTaskCount.innerText = `Total: ${this.arr.length}`
             this.input.value = ""
-            console.log(this.arr); ////
-        })
-      ;
+        });
 
-        this.btnAllTasks.addEventListener( "click", () => {this.showAllTasks()});
-        this.btnActiveTasks.addEventListener( "click", () => {this.showActiveTasks()});
-        this.btnCompletedTasks.addEventListener( "click", () => {this.showCompletedTasks()});
+        this.btnAllTasks.addEventListener("click", () => { this.showAllTasks() });
+        this.btnActiveTasks.addEventListener("click", () => { this.showActiveTasks() });
+        this.btnCompletedTasks.addEventListener("click", () => { this.showCompletedTasks() });
     }
 
     showAllTasks() {
@@ -99,7 +120,6 @@ class ToDo {
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
     }
-
 }
 
 class Task {
@@ -122,7 +142,6 @@ class Task {
 
         this.btnDeleteTask = document.createElement("span");
         this.btnDeleteTask.className = "deletebutton"
-        // this.btnDeleteTask.classList = "btn btn-danger";
         this.btnDeleteTask.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 80 80" style="enable-background:new 0 0 80 80;" xml:space="preserve" width="15" height="15">
             <g>
                 <polygon style="fill:#F78F8F;" points="40,49.007 15.714,73.293 6.707,64.286 30.993,40 6.707,15.714 15.714,6.707 40,30.993    64.286,6.707 73.293,15.714 49.007,40 73.293,64.286 64.286,73.293  "/>
@@ -143,49 +162,55 @@ class Task {
             this.checkBox.checked = "checked";
             this.taskBox.classList = "taskbox completed";
 
-          } else {
+        } else {
             this.taskBox.classList = "taskbox active";
-          }
-
+        }
     }
 
     changeCheckBox() {
         if (this.todo.checkbox === false) {
-          this.checkBox.checked = "checked";
-          let arr = JSON.parse(localStorage.getItem("key"));
-          let index = arr.findIndex((item) => this.todo.text === item.text);
-          if (index >= 0) {
-            arr.splice(index, 1, { ...arr[index], checkbox: true });
-          }
-          localStorage.setItem("key", JSON.stringify(arr));
-          this.todo.checkbox = true;
-          this.taskBox.classList = "taskbox completed";
+            this.checkBox.checked = "checked";
+            let arr = JSON.parse(localStorage.getItem("key"));
+            let index = arr.findIndex((item) => this.todo.text === item.text);
+
+            if (index >= 0) {
+                arr.splice(index, 1, { ...arr[index], checkbox: true });
+            }
+
+            localStorage.setItem("key", JSON.stringify(arr));
+            this.todo.checkbox = true;
+            this.taskBox.classList = "taskbox completed";
+            let totalTaskCount = document.getElementById("totaltaskcount");
+            totalTaskCount.innerText = `Total: ${arr.length}`;
         } else {
-          let arr = JSON.parse(localStorage.getItem("key"));
-          let index = arr.findIndex((item) => this.todo.text === item.text);
-          if (index >= 0) {
-            arr.splice(index, 1, { ...arr[index], checkbox: false });
-          }
-          localStorage.setItem("key", JSON.stringify(arr));
-          this.todo.checkbox = false;
-          this.taskBox.classList = "taskbox active";
+            let arr = JSON.parse(localStorage.getItem("key"));
+            let index = arr.findIndex((item) => this.todo.text === item.text);
+
+            if (index >= 0) {
+                arr.splice(index, 1, { ...arr[index], checkbox: false });
+            }
+            localStorage.setItem("key", JSON.stringify(arr));
+            this.todo.checkbox = false;
+            this.taskBox.classList = "taskbox active";
+
+            let checkBoxChooseAllInvisible = document.getElementById("checkboxbhooseallinvisible");
+            let checkBoxChooseAll = document.getElementById("checkboxchooseall");
+            checkBoxChooseAll.innerHTML = "+";
+            checkBoxChooseAllInvisible.checked = false;
         }
-      }
+    }
 
     deleteTask() {
-        console.log("deleted"); ////
         document.getElementById("todolist").removeChild(this.taskBox);
         let arr = JSON.parse(localStorage.getItem("key"));
         let index = arr.findIndex((task) => this.todo.text === task.text);
         if (index >= 0) {
-            arr.splice(index, 1)
+            arr.splice(index, 1);
+            let totalTaskCount = document.getElementById("totaltaskcount");
+            totalTaskCount.innerText = `Total: ${arr.length}`;
+            localStorage.setItem("key", JSON.stringify(arr));
         }
-        localStorage.setItem("key", JSON.stringify(arr));
-        let totalTaskCount = document.getElementById("totaltaskcount");
-        totalTaskCount.innerText = `Total: ${arr.length}`;
-        console.log(arr); ////
     }
-
 }
 
 let toDo = new ToDo("container");

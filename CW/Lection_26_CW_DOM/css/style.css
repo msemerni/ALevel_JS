@@ -28,13 +28,12 @@
   }
 
   .checkboxchooseall {
-    border: solid 2px;
+    border: solid 2px grey;
     border-right: 0;
     width: 6%;
     color: #ffffff;
-    border-color: #000000;
     cursor: pointer;
-    background: #000000;
+    background: grey;
     padding: 0px 4px 0px 4px;
     font-weight: 800;
     font-size: 22px;
@@ -43,12 +42,15 @@
 
   .checkboxchooseall:hover {
     background: #ffffff;
-    color: #000000;
+    color: grey;
+  }
+  #checkboxbhooseallinvisible {
+    display: none;
   }
 
   .maininput {
     /* width: 100%; */
-    border: solid 2px;
+    border: solid 2px grey;
     flex-grow: 1;
     padding-left: 5px;
     text-align: center;
@@ -60,7 +62,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border: solid 1px;
+    border: solid 1px grey;
     border-top: 0;
   }
 
@@ -68,9 +70,9 @@
     background: #f7f7f7;
   }
 
-  #todolist div:nth-child(2n) {
+  /* #todolist div:nth-child(2n) {
     background: #e8e8e8;
-  }
+  } */
 
   .tasktext {
     word-break: break-all;
