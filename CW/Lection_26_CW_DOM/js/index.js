@@ -65,6 +65,8 @@ class ToDo {
             this.totalTaskCount.innerText = `Total: ${this.arr.length}`;
         }
 
+        history.pushState(null, null, window.location.href = `/#all`);
+
         this.checkBoxChooseAllInvisible.addEventListener('change', () => {
             let listOfTasks = document.querySelectorAll(".taskcheckbox");
 
@@ -107,18 +109,21 @@ class ToDo {
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active show"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
+        history.pushState(null, null, window.location.href = `/#all`);
     }
 
     showActiveTasks() {
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed hide"));
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
+        history.pushState(null, null, window.location.href = `/#active`);
     }
 
     showCompletedTasks() {
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active hide"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
+        history.pushState(null, null, window.location.href = `/#completed`);
     }
 }
 
