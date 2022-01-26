@@ -153,7 +153,7 @@ class Task {
         this.taskBox.append(this.taskText);
         this.taskBox.append(this.btnDeleteTask);
 
-        document.getElementById("todolist").append(this.taskBox);
+        document.getElementById("todolist").prepend(this.taskBox);
 
         this.checkBox.addEventListener('change', () => this.changeCheckBox())
         this.btnDeleteTask.addEventListener("click", () => this.deleteTask());
