@@ -65,7 +65,7 @@ class ToDo {
             this.totalTaskCount.innerText = `Total: ${this.arr.length}`;
         }
 
-        history.pushState(null, null, window.location.href = `/#all`);
+        history.pushState(null, null, window.location.href = `/#/all`);
 
         this.checkBoxChooseAllInvisible.addEventListener('change', () => {
             let listOfTasks = document.querySelectorAll(".taskcheckbox");
@@ -138,8 +138,13 @@ class Task {
         this.taskBox.classList = "taskbox active";
 
         this.checkBox = document.createElement('input');
+        this.checkBox.id = "taskcheckbox"
         this.checkBox.className = "taskcheckbox"
         this.checkBox.type = "checkbox";
+
+        this.fakeCheckBox = document.createElement('span');
+        this.fakeCheckBox.className = "fakecheckbox";
+        this.fakeCheckBox.htmlFor = "taskcheckbox";
 
         this.taskText = document.createElement('span');
         this.taskText.className = "tasktext"
@@ -155,6 +160,7 @@ class Task {
             </svg>`;
 
         this.taskBox.append(this.checkBox);
+        this.taskBox.append(this.fakeCheckBox);
         this.taskBox.append(this.taskText);
         this.taskBox.append(this.btnDeleteTask);
 
