@@ -1,17 +1,14 @@
 @font-face {
   font-family: "Dewberry Bold";
-  src: url("../src/fonts/dewberry_bold.eot"); /* IE 9 Compatibility Mode */
-  src: url("../src/fonts/dewberry_bold.eot?#iefix") format("embedded-opentype"),
-    /* IE < 9 */ url("../src/fonts/dewberry_bold.woff2") format("woff2"),
-    /* Super Modern Browsers */ url("../src/fonts/dewberry_bold.woff")
+  src: url("../fonts/dewberry_bold.eot"); /* IE 9 Compatibility Mode */
+  src: url("../fonts/dewberry_bold.eot?#iefix") format("embedded-opentype"),
+    /* IE < 9 */ url("../fonts/dewberry_bold.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/dewberry_bold.woff")
       format("woff"),
     /* Firefox >= 3.6, any other modern browser */
-      url("../src/fonts/dewberry_bold.ttf") format("truetype"),
-    /* Safari, Android, iOS */
-      url("../src/fonts/dewberry_bold.svg#dewberry_bold") format("svg"); /* Chrome < 4, Legacy iOS */
-}
-body {
-  font-family: sans-serif;
+      url("../fonts/dewberry_bold.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/dewberry_bold.svg#dewberry_bold")
+      format("svg"); /* Chrome < 4, Legacy iOS */
 }
 
 #container {
@@ -27,8 +24,12 @@ body {
   text-align: center;
 }
 #inputTodo {
-  margin: 10px 0;
-  width: 590px;
+  margin: 10px 10px;
+  width: 540px;
+}
+#allcheck {
+  margin-left: 10px;
+  margin-top: 15px;
 }
 .todoContainer {
   display: flex;
@@ -44,6 +45,9 @@ body {
 .mainText {
   max-width: 450px;
   word-break: break-all;
+}
+.containerButtons {
+  display: flex;
 }
 button {
   margin: 5px;
@@ -61,4 +65,8 @@ button {
 }
 .show {
   display: block;
+}
+
+#btnDelete {
+  display: none;
 }

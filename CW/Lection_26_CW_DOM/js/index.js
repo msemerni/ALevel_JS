@@ -17,12 +17,12 @@ class ToDo {
         this.checkBoxChooseAll.innerHTML = `+`;
         this.checkBoxChooseAll.id = `checkboxchooseall`;
         this.checkBoxChooseAll.className = "checkboxchooseall";
-        this.checkBoxChooseAll.htmlFor = "checkboxbhooseallinvisible"
+        this.checkBoxChooseAll.htmlFor = "checkboxchooseallinvisible"
         this.inputContainer.append(this.checkBoxChooseAll);
 
         this.checkBoxChooseAllInvisible = document.createElement("input");
         this.checkBoxChooseAllInvisible.type = "checkbox";
-        this.checkBoxChooseAllInvisible.id = "checkboxbhooseallinvisible";
+        this.checkBoxChooseAllInvisible.id = "checkboxchooseallinvisible";
         this.checkBoxChooseAllInvisible.checked = false;
         this.inputContainer.append(this.checkBoxChooseAllInvisible);
 
@@ -58,6 +58,16 @@ class ToDo {
         this.btnCompletedTasks.innerText = "Completed";
         this.btnCompletedTasks.classList = "btn btn-outline-success btn-sm";
         this.footer.append(this.btnCompletedTasks);
+
+        this.btnDeleteCompletedTasks = document.createElement("button");
+        this.btnDeleteCompletedTasks.id = "btndeletecompletedtasks";
+        this.btnDeleteCompletedTasks.title = "Delete all Completed tasks";
+        this.btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
+        this.btnDeleteCompletedTasks.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg>`;
+        this.footer.append(this.btnDeleteCompletedTasks);
 
         if (localStorage.getItem("key") !== null) {
             this.arr = JSON.parse(localStorage.getItem("key"));
@@ -103,6 +113,18 @@ class ToDo {
         this.btnAllTasks.addEventListener("click", () => { this.showAllTasks() });
         this.btnActiveTasks.addEventListener("click", () => { this.showActiveTasks() });
         this.btnCompletedTasks.addEventListener("click", () => { this.showCompletedTasks() });
+
+        this.enableDisableBtnDeleteCompletedTasks();
+    }
+
+    enableDisableBtnDeleteCompletedTasks() {
+        let anyIsChecked = document.querySelectorAll(".completed");
+        if (anyIsChecked.length > 0) {
+            this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks";
+            console.log(anyIsChecked);
+        } else {
+            console.log("nothing checked");
+        }
     }
 
     showAllTasks() {
@@ -137,14 +159,19 @@ class Task {
         // this.taskBox.className = "taskbox";
         this.taskBox.classList = "taskbox active";
 
+        this.checkBoxBox = document.createElement("label");
+        this.checkBoxBox.className = "checkboxbox";
+
         this.checkBox = document.createElement('input');
         this.checkBox.id = "taskcheckbox"
         this.checkBox.className = "taskcheckbox"
         this.checkBox.type = "checkbox";
+        this.checkBoxBox.append(this.checkBox);
 
         this.fakeCheckBox = document.createElement('span');
         this.fakeCheckBox.className = "fakecheckbox";
         this.fakeCheckBox.htmlFor = "taskcheckbox";
+        this.checkBoxBox.append(this.fakeCheckBox);
 
         this.taskText = document.createElement('span');
         this.taskText.className = "tasktext"
@@ -159,8 +186,7 @@ class Task {
             </g>
             </svg>`;
 
-        this.taskBox.append(this.checkBox);
-        this.taskBox.append(this.fakeCheckBox);
+        this.taskBox.append(this.checkBoxBox);
         this.taskBox.append(this.taskText);
         this.taskBox.append(this.btnDeleteTask);
 
@@ -175,6 +201,19 @@ class Task {
 
         } else {
             this.taskBox.classList = "taskbox active";
+        }
+    }
+
+    enableDisableBtnDeleteCompletedTasks() {
+        let btnDeleteCompletedTasks = document.getElementById("btndeletecompletedtasks");
+
+        let anyIsChecked = document.querySelectorAll(".completed");
+        if (anyIsChecked.length > 0) {
+            btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks";
+            console.log(anyIsChecked);
+        } else {
+            btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
+            console.log("nothing checked");
         }
     }
 
@@ -193,6 +232,7 @@ class Task {
             this.taskBox.classList = "taskbox completed";
             let totalTaskCount = document.getElementById("totaltaskcount");
             totalTaskCount.innerText = `Total: ${arr.length}`;
+            this.enableDisableBtnDeleteCompletedTasks();
         } else {
             let arr = JSON.parse(localStorage.getItem("key"));
             let index = arr.findIndex((item) => this.todo.text === item.text);
@@ -204,10 +244,11 @@ class Task {
             this.todo.checkbox = false;
             this.taskBox.classList = "taskbox active";
 
-            let checkBoxChooseAllInvisible = document.getElementById("checkboxbhooseallinvisible");
+            let checkBoxChooseAllInvisible = document.getElementById("checkboxchooseallinvisible");
             let checkBoxChooseAll = document.getElementById("checkboxchooseall");
             checkBoxChooseAll.innerHTML = "+";
             checkBoxChooseAllInvisible.checked = false;
+            this.enableDisableBtnDeleteCompletedTasks();
         }
     }
 

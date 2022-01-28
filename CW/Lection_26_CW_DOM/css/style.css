@@ -69,7 +69,7 @@
     background: #ffffff;
     color: grey;
   }
-  #checkboxbhooseallinvisible {
+  #checkboxchooseallinvisible {
     display: none;
   }
 
@@ -110,12 +110,12 @@
   .footer {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
   }
 
   button.btn {
-    margin: 5px;
+    margin: 5px 0px 5px 5px;
   }
 
   .taskbox input {
@@ -150,23 +150,40 @@
     font-weight: 600;
   }
 
-  /* .taskcheckbox {
+  .taskcheckbox {
       display: none;
-  } */
+  }
+
+  .checkboxbox {
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+      margin: 5px;
+  }
   
   .fakecheckbox { 
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #3c7e5e;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #3c7e5e;
     border-radius: 50%;
-    /* Выровняем по тексту */
-    vertical-align: middle;
-    margin-top: -2px;
-    margin-right: 4px;
   }
 
   .taskcheckbox:checked + .fakecheckbox {
-    background: #198754;
+    background: #108694;
   }
+
+  .btndeletecompletedtasks {
+    height: 31px;
+    padding: 0px 7px 2px 7px;
+    /* visibility: visible; */
+  }
+
+  /* .visible {
+      visibility: visible;
+  }
+
+  .ivisible {
+    visibility: hidden;
+} */
   
