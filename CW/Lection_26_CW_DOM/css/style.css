@@ -29,7 +29,7 @@
   }
   
   #container {
-    width: 400px;
+    max-width: 400px;
     margin: 0 auto;
   }
 
@@ -109,6 +109,7 @@
 
   .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -176,7 +177,6 @@
   .btndeletecompletedtasks {
     height: 31px;
     padding: 0px 7px 2px 7px;
-    /* visibility: visible; */
   }
 
   /* .visible {
@@ -186,4 +186,10 @@
   .ivisible {
     visibility: hidden;
 } */
+
+@media (max-width: 767px) {
+    #container {
+        width: 100%;
+      }
+}
   
