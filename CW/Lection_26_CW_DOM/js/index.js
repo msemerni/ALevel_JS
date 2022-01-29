@@ -110,6 +110,14 @@ class ToDo {
             this.input.value = ""
         });
 
+        this.btnDeleteCompletedTasks.addEventListener("click", () => {
+            document.querySelectorAll(".completed").forEach
+                ((item) => document.getElementById("todolist").removeChild(item));
+            let arr = JSON.parse(localStorage.getItem("key"));
+            arr = arr.filter((item) => item.checkbox !== true);
+            localStorage.setItem("key", JSON.stringify(arr));
+        })
+
         this.btnAllTasks.addEventListener("click", () => { this.showAllTasks() });
         this.btnActiveTasks.addEventListener("click", () => { this.showActiveTasks() });
         this.btnCompletedTasks.addEventListener("click", () => { this.showCompletedTasks() });
@@ -121,9 +129,6 @@ class ToDo {
         let anyIsChecked = document.querySelectorAll(".completed");
         if (anyIsChecked.length > 0) {
             this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks";
-            console.log(anyIsChecked);
-        } else {
-            console.log("nothing checked");
         }
     }
 
@@ -131,22 +136,28 @@ class ToDo {
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active show"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
-        history.pushState(null, null, window.location.href = `/#all`);
+        history.pushState(null, null, window.location.href = `/#/all`);
     }
 
-    showActiveTasks() {
+    showActiveTasks() { ////галок нет
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed hide"));
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
-        history.pushState(null, null, window.location.href = `/#active`);
+        history.pushState(null, null, window.location.href = `/#/active`);
+        this.btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks"; ////
     }
 
-    showCompletedTasks() {
+    showCompletedTasks() { ////галки стоят / спрятать активные(не выполненные)
+        let completedTasks = document.querySelectorAll(".completed");
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active hide"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
-        history.pushState(null, null, window.location.href = `/#completed`);
+        history.pushState(null, null, window.location.href = `/#/completed`);
+        if (completedTasks.length > 0) {
+            this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks"; ////
+        }
     }
+
 }
 
 class Task {
@@ -210,16 +221,15 @@ class Task {
         let anyIsChecked = document.querySelectorAll(".completed");
         if (anyIsChecked.length > 0) {
             btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks";
-            console.log(anyIsChecked);
         } else {
             btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
-            console.log("nothing checked");
         }
     }
 
     changeCheckBox() {
         if (this.todo.checkbox === false) {
             this.checkBox.checked = "checked";
+
             let arr = JSON.parse(localStorage.getItem("key"));
             let index = arr.findIndex((item) => this.todo.text === item.text);
 
@@ -233,6 +243,11 @@ class Task {
             let totalTaskCount = document.getElementById("totaltaskcount");
             totalTaskCount.innerText = `Total: ${arr.length}`;
             this.enableDisableBtnDeleteCompletedTasks();
+
+            if (document.location.href.indexOf("active") !== -1) {
+                this.taskBox.classList = "taskbox completed hide";
+            }
+
         } else {
             let arr = JSON.parse(localStorage.getItem("key"));
             let index = arr.findIndex((item) => this.todo.text === item.text);
@@ -249,6 +264,9 @@ class Task {
             checkBoxChooseAll.innerHTML = "+";
             checkBoxChooseAllInvisible.checked = false;
             this.enableDisableBtnDeleteCompletedTasks();
+            if (document.location.href.indexOf("completed") !== -1) {
+                this.taskBox.classList = "taskbox active hide";
+            }
         }
     }
 
