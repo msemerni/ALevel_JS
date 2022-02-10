@@ -106,8 +106,9 @@ class ToDo {
                 this.arr.push(new Task({ checkbox: false, text: this.input.value }).todo)
             }
             localStorage.setItem("key", JSON.stringify(this.arr));
-            this.totalTaskCount.innerText = `Total: ${this.arr.length}`
-            this.input.value = ""
+            this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
+            this.input.value = "";
+            this.printTotal();
         });
 
         this.btnDeleteCompletedTasks.addEventListener("click", () => {
@@ -116,6 +117,7 @@ class ToDo {
             let arr = JSON.parse(localStorage.getItem("key"));
             arr = arr.filter((item) => item.checkbox !== true);
             localStorage.setItem("key", JSON.stringify(arr));
+            this.printTotal ();
         })
 
         this.btnAllTasks.addEventListener("click", () => { this.showAllTasks() });
@@ -125,18 +127,38 @@ class ToDo {
         this.enableDisableBtnDeleteCompletedTasks();
     }
 
+    printTotal () {
+        if (document.location.href.indexOf("all") >= 0) {
+            this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
+        }
+        if (document.location.href.indexOf("active") >= 0) {
+            this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
+        }
+        if (document.location.href.indexOf("completed") >= 0) {
+            this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
+        }
+    }
+
     enableDisableBtnDeleteCompletedTasks() {
         let anyIsChecked = document.querySelectorAll(".completed");
         if (anyIsChecked.length > 0) {
             this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks";
         }
+        if (document.location.href.indexOf("active") >= 0) {
+            this.btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
+        }
     }
 
     showAllTasks() {
+        let completedTasks = document.querySelectorAll(".completed");
         document.querySelectorAll(".active").forEach((item) => (item.classList = "taskbox active show"));
         document.querySelectorAll(".completed").forEach((item) => (item.classList = "taskbox completed show"));
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
         history.pushState(null, null, window.location.href = `/#/all`);
+        if (completedTasks.length > 0) {
+            this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks"; ////
+        }
+        this.printTotal();
     }
 
     showActiveTasks() { ////галок нет
@@ -145,6 +167,7 @@ class ToDo {
         this.totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
         history.pushState(null, null, window.location.href = `/#/active`);
         this.btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks"; ////
+        this.printTotal();
     }
 
     showCompletedTasks() { ////галки стоят / спрятать активные(не выполненные)
@@ -156,6 +179,7 @@ class ToDo {
         if (completedTasks.length > 0) {
             this.btnDeleteCompletedTasks.classList = "btn btn-danger btndeletecompletedtasks"; ////
         }
+        this.printTotal();
     }
 
 }
@@ -224,9 +248,27 @@ class Task {
         } else {
             btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
         }
+
+        if (document.location.href.indexOf("active") >= 0) {
+            btnDeleteCompletedTasks.classList = "btn btn-secondary disabled btndeletecompletedtasks";
+        }
+    }
+
+    printTotal () {
+        let totalTaskCount = document.getElementById("totaltaskcount");
+        if (document.location.href.indexOf("all") >= 0) {
+            totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
+        }
+        if (document.location.href.indexOf("active") >= 0) {
+            totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
+        }
+        if (document.location.href.indexOf("completed") >= 0) {
+            totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
+        }
     }
 
     changeCheckBox() {
+        let totalTaskCount = document.getElementById("totaltaskcount");
         if (this.todo.checkbox === false) {
             this.checkBox.checked = "checked";
 
@@ -240,14 +282,17 @@ class Task {
             localStorage.setItem("key", JSON.stringify(arr));
             this.todo.checkbox = true;
             this.taskBox.classList = "taskbox completed";
-            let totalTaskCount = document.getElementById("totaltaskcount");
-            totalTaskCount.innerText = `Total: ${arr.length}`;
+
+            totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length}`;
             this.enableDisableBtnDeleteCompletedTasks();
 
             if (document.location.href.indexOf("active") !== -1) {
                 this.taskBox.classList = "taskbox completed hide";
             }
-
+            if (document.location.href.indexOf("all") >= 0) {
+                totalTaskCount.innerText = `Total: ${document.querySelectorAll(".active").length + document.querySelectorAll(".completed").length}`;
+            }
+            this.printTotal();
         } else {
             let arr = JSON.parse(localStorage.getItem("key"));
             let index = arr.findIndex((item) => this.todo.text === item.text);
@@ -267,6 +312,8 @@ class Task {
             if (document.location.href.indexOf("completed") !== -1) {
                 this.taskBox.classList = "taskbox active hide";
             }
+            totalTaskCount.innerText = `Total: ${document.querySelectorAll(".completed").length}`;
+            this.printTotal();
         }
     }
 
@@ -280,10 +327,11 @@ class Task {
             totalTaskCount.innerText = `Total: ${arr.length}`;
             localStorage.setItem("key", JSON.stringify(arr));
         }
+        this.printTotal();
     }
 }
 
-let toDo = new ToDo("container");
+new ToDo("container");
 
 
 ///////////////// генератор ID //////////////////////

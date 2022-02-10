@@ -189,7 +189,8 @@
 
 @media (max-width: 767px) {
     #container {
-        width: 100%;
-      }
+      min-width: 385px;
+      width: 100%;
+    }
 }
   
